@@ -1,0 +1,192 @@
+\documentclass[
+    trieste,
+    corpo=11pt,
+    twoside,
+    evenboxes,
+]{toptesi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfpagewidth\paperwidth    % per assicurarsi che nel pdf
+\pdfpageheight\paperheight  % sia riempita tutta la pagina
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% LIBRERIE
+\usepackage[utf8]{inputenc}         % utf8
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+%\usepackage{textcomp}               % provide many text symbols
+%\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[a-1b]{pdfx}
+\usepackage[pdfa]{hyperref}
+\usepackage{minted}                 % coding language
+\usepackage{xurl}
+\usepackage{epigraph}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% CONFIGURAZIONE LINK E RIFERIMENTI
+\hypersetup{%
+    pdfpagemode={UseOutlines},
+    bookmarksopen,
+    pdfstartview={FitH},
+    colorlinks,
+    linkcolor={black}, %COLORE RIFERIMENTI INDICE
+    citecolor={blue}, %COLORE CITAZIONI
+    urlcolor={blue}, %COLORE URL
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% CAPITOLI DA INCLUDERE
+\includeonly{%
+  chapters/stateofart
+}
+
+% FILE DI BIBLIOGRAFIA
+%\addbibresource{bibliography/bibliography.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% DA ABILITARE PER DOCUMENTI LATEX IN ITALIANO
+\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% INIZIO DOCUMENTO
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% FRONTESPIZIO - PERSONALIZZARE
+%\begin{frontespizio}
+
+% UNIVERSITA - NOME
+\ateneo{Università degli studi di Parma}
+
+% FACOLTA - NOME
+\facolta{Ingegneria}
+
+% CORSO DI LAUREA - NOME
+\corsodilaurea{Ingegneria dei Sistemi Informativi}
+
+% TIPOLOGIA TESI
+\TesiDiLaurea{Tesi di Laurea di primo livello}
+
+% TITOLO
+\titolo{Refactoring di un software per la prenotazione di servizi sanitari}
+
+% SOTTOTITOLO
+\sottotitolo{Reverse engineering del software, analisi delle sue criticità ed elaborazione di una soluzione}
+
+% RELATORE/I - DICITURA - CANCELLARE SE UN SOLO RELATORE
+\AdvisorName{Relatori}
+% RELATORE - PROF. NOME E COGNOME
+\relatore{prof.\ Amoretti Michele}
+% RELATORE AGGIUNTIVO - PROF NOME E COGNOME
+% SE SI HA SOLO UN RELATORE ELIMINARE INSIEME AD AdvisorName
+\terzorelatore{prof.\ Prati Andrea}
+%\terzorelatore{prof.\ Strozzi Fabio}
+
+% CANDIDATO - NOME E COGNOME
+\candidato{Daniele Pellegrini}[285240]
+
+% LOGO UNIVERSITA
+\logosede{images/logo.png}
+
+% AZIENDA E TUTORE AZIENDALE
+\tutoreaziendale{dott.\ ing.\ Strozzi Fabio}
+\NomeTutoreAziendale{Maps Group S.p.A}
+
+% DATA - MESE ANNO
+\sedutadilaurea{11 dicembre 2020}
+
+\frontespizio
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%INTERLINEA - DEFAULT 1 - NON ESAGERATE, NON SUPERATE MAI 1.3 ;)
+%\interlinea{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frontmatter
+
+% DEDICA - PERSONALIZZARE
+% VSPACE - PROPORZIONE USATA PER CENTRATURA VERTICALE DEL TESTO
+% FLUSHRIGHT - ALLINEAMENTO ORIZZONTALE A DESTRA
+\vspace*{\stretch{1}}
+\begin{flushright}
+  \noindent
+  Alla mia famiglia, da sempre centro gravitazionale della mia vita.
+  \vspace{10px}
+  
+  %\footnotesize{A mia madre Donatella, che mi ha insegnato quali fossero le cose davvero importanti e di cui valesse davvero la pena preoccuparsi\\}
+  %\footnotesize{A mio padre Paolo, che mi ha insegnato quanto sia necessario uscire dalla propria zona di comfort acquisendo anche altre abilità oltre quelle che si hanno\\}
+  %\footnotesize{A mia sorella Elisa, che mi ha insegnato ad affrontare anche le strade più tortuose, se sono quelle giuste per noi}
+
+\end{flushright}
+\vspace*{\stretch{6}}
+\cleardoublepage
+
+
+% CITAZIONE - PERSONALIZZARE
+% VSPACE - PROPORZIONE USATA PER CENTRATURA VERTICALE DEL TESTO
+% FLUSHRIGHT - ALLINEAMENTO ORIZZONTALE A DESTRA
+
+\vspace*{\stretch{1}}
+\begin{flushright}
+  \noindent
+  Whether you want to uncover the secrets of the universe, or you just want to pursue a career in the 21st century, basic computer programming is an essential skill to learn.\\
+  \vspace{5px}
+  \small{\textit{Stephen Hawking}}
+\end{flushright}
+\vspace*{\stretch{1}}
+\begin{flushright}
+  \noindent
+  Everybody in this country should learn to program a computer, because it teaches you how to think\\
+  \vspace{5px}
+  \small{\textit{Steve Jobs}}
+\end{flushright}
+\vspace*{\stretch{6}}
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ringraziamenti
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sommario % stampa il sommario
+Il presente elaborato ha come obiettivo la \textbf{reingegnerizzazione di un software utilizzato per la prenotazione di servizi sanitari}. A seconda della struttura ospedaliera presso cui si prenota, i servizi offerti da questo applicativo sono molteplici e di diverso tipo: esami di laboratorio, esami del sangue, visite mediche o accettazioni. Il primo scopo di questa applicazione è dunque quello di velocizzare l'accesso ai servizi, controllandone l'affluenza. Oltre alla riduzione del contatto interpersonale, l'ottimizzazione di software come questo può ridurre il rischio di assembramento e una migliore profilazione dell'utente con cui il personale e gli altri clienti entrano in contatto.\\
+Il COVID19 ha portato questa esigenza, che inizialmente era una comodità, ad essere a tutti gli effetti \textbf{una necessità} e un requisito fondamentale per le aziende che richiedono questo tipo di servizi: per la loro gestione interna e per garantire la sicurezza dei loro clienti, a maggior ragione per quelle nel settore sanitario. Il sistema è attualmente online e operativo, ma non ottimizzato per il suo funzionamento. \\Con un'azione di reverse engineering si andranno ad analizzare i punti critici del sistema, a studiarne il traffico e l'effettivo comportamento. Non si agirà direttamente sul frontend, la parte visibile dall'utente finale e con la quale interagisce, ma \textit{sul backend}, la parte che elabora i dati e che ha il compito di interfacciarsi con il database, dove vengono salvati i dati. Il fine ultimo di quest'opera di reingegnerizzazione sarà la costruzione di un \textbf{nuovo layer di Rest APIs} dietro un reverse proxy. Il sistema attuale non presenta un layer di API, pertanto le chiamate dal frontend al backend vengono trasmesse in modo contorto e poco efficiente: la banalità del sistema monolitico potrebbe essere causa di un attacco informatico o malfunzionamenti, per questo si è optato per un'architettura di microservizi. Questo nuovo strato verrà inizialmente affiancato al sistema esistente, fino a quando un successivo sviluppo ne renderà possibile una completa migrazione. La parte di backend, attualmente scritta in PHP, verrà riscritta in Java, utilizzando la JDK 15 e il framework Spring, mentre per una gestione più ottimale del progetto si utilizzerà Maven. Con la reingegnerizzazione il sistema potrà ottenere nuove funzionalità richieste dalle strutture affiliate e migliorare quelle già implementate, l'importante è che \textbf{rimanga coerente con il suo attuale funzionamento}: il nuovo strato che si inserirà tra frontend e backend dovrà garantire il corretto funzionamento di tutte le operazioni già presenti.\\
+In una società sempre più frenetica e in continuo movimento, l'idea di Zerocoda ha preso piede velocemente. Sulla sua base, si è pertanto deciso di creare un'applicazione analoga per i servizi commerciali, un'esigenza  diversa, ma vicina alla precedente. L'idea è già stata sviluppata partendo proprio da questo software, pertanto il layer di API che si andrà a realizzare costituisce il primo passo sulla strada che porterà alla fusione delle due.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% INDICE
+\tableofcontents
+
+% INDICE DELLE FIGURE
+\listoffigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\mainmatter
+
+% INCLUSIONE FILE CAPITOLI - COERENTE CON LISTA IN ALTO
+
+\include{chapters/stateofart.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% BIBLIOGRAFIA
+%\phantomsection
+%\addcontentsline{toc}{chapter}{\refname}
+%\nocite{*}
+%\printbibliography
+
+\end{document}
