@@ -191,6 +191,24 @@ Sarebbe quindi diminutivo definire SQL 'un semplice linguaggio di interrogazione
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Architettura di Microservizi}
+\subsection{Architettura Monolitica}
+Ai primordi dello sviluppo applicativo, anche un cambiamento minimo  a un software esistente imponeva un aggiornamento completo e un ciclo di controllo qualità. Le applicazioni erano sviluppate e distribuite come una singola entità, e tale approccio veniva spesso definito \textbf{“monolitico”}, perché il codice sorgente dell’intera applicazione era compilato in una singola unità di deployment. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/01_7_monolithic_vs_microservices.pdf}
+    \caption{Architettura Monolitica e Microservizi }
+    \label{fig:monolithicvsmicroservices}
+\end{figure}
+
+\paragraph{Caratteristiche} Le applicazioni che seguono questo tipo di architettura sono di facile implementazione, in quanto tipicamente raccolte all'interno di un unico progetto e distribuite in un unico pacchetto. Questo tipo di architettura si presta bene per applicazioni piccole o comunque poco soggette a cambiamenti, ma la cosa cambia quando ci troviamo a sviluppare applicazioni complesse che richiedono continui aggiornamenti. Se uno di questi dovesse causare errori, l'unica soluzione sarebbe quella di \textit{disconnettere tutto} e fare un rollback totale del software: è chiaro che un'azienda non può permettersi tempi di inattività. L’unico modo di poter scalare un’applicazione monolitica è quello di replicare l’intera applicazione con conseguente aumento di costi e risorse necessarie. In seguito ai problemi derivanti da questo tipo di architettura, nacquero i primi studi di archittetture a servizi, sulla base di uno dei dogmi dell'ingegneria del software:
+
+\newtheorem*{defin}{Principio di Singola Responsabilità}
+\begin{defin}
+    Riunire le cose che cambiano per lo stesso motivo e separare quelle che cambiano per motivi diversi.
+\end{defin}
+
+\subsubsection{Cosa sono i Microservizi}
 L'architettura di microservizi rappresenta un'approccio all'avanguardia per lo sviluppo e l'organizzazione del software. Secondo questo stile, il software è composto da servizi indipendenti di piccole dimensioni che hanno come finalità lo svolgimento di un unico compito, e di farlo nel migliore dei modi. Ciascun microservizio, indipendente dagli altri, è dunque gestito da un unico team di sviluppo. Per una definizione più precisa riprendiamo le parole di Martin Fowler, considerato uno dei massimi esperti in materia, che afferma: \textit{<<Lo stile architetturale a microservizi è un approccio allo sviluppo di una singola applicazione come insieme di piccoli servizi, ciascuno dei quali viene eseguito da un proprio processo e comunica con un meccanismo snello, spesso una HTTP API.>>} [4]
 
 \subsection{Le origini}
@@ -200,20 +218,35 @@ Il primo tentativo di architettura a servizi nasce con l’\texttt{architettura 
 Per studiare le differenze tra le due architettura facciamo riferimento al seguente schema:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/01_7_microservices_vs_soa.pdf}
+    \includegraphics[width=0.75\textwidth]{images/01_8_microservices_vs_soa.pdf}
     \caption{Architettura SOA e Microservizi }
     \label{fig:soavsmicroservices}
 \end{figure}
-\paragraph*{Granularità dei Servizi} Il numero dei servizi è un buon fattore per la differenziazione delle due architetture. Lo stesso Martin Fowler, citato precedentemente, architettura SOA non si arriva neanche ad una decina di  servizi mentre in un architettura a microservice il numero dei servizi e’ molto più alto: basti pensare che Netflix ha dichiarato di fare uso di oltre di 700 microservizi. [5]
+\paragraph*{Granularità dei Servizi} Il numero dei servizi è un buon fattore per la differenziazione delle due architetture. Lo stesso Martin Fowler, citato precedentemente, afferma che in un'architettura SOA non si arriva neanche ad una decina di  servizi mentre in un architettura a microservice il numero dei servizi e’ molto più alto: basti pensare che il servizio di streaming Netflix ha dichiarato di fare uso di oltre di 700 microservizi. [5]
 
 \paragraph{Comunicazione} I microservizi abbandonano l’utilizzo di ESB, comunicando direttamente tra loro con meccanismi di comunicazione light. Nella SOA, l’ESB potrebbe diventare un singolo punto di errore che influisce sull’intero sistema. Poiché ogni servizio comunica attraverso l’ESB, se uno dei servizi rallenta, potrebbe ostruire l’ESB con le richieste per quel servizio. D’altra parte, i microservizi sono molto migliori nella tolleranza agli errori: se un microservizio presenta un errore di memoria, verrà interessato solo quel microservizio.
 
 \paragraph{Database} In SOA i servizi condividono gli storage mentre con i microservice ogni servizio può avere un database indipendente.
 
-\paragraph{Eterogeneità delle Tecnologie} Durante lo sviluppo di un microservizio si ha totale libertà di scelta nell'utilizzo delle tecnologie. Ciascuna tecnologia viene decisa esclusivamente in base allo scopo del microservizio, senza basarsi sulla sua interazione con gli altri. Un microservizio può fare affidamento su un modello di database relazionale mentre un servizio con cui comunica su uno di tipo non relazionale, così come la loro logica può essere scritta in linguaggi differenti.
+\subsection{Caratteristiche dei Microservizi}
 
-\subsection{Architettura Monolitica}
+\subsubsection{Autonomia}
+Ciascun servizio nell’architettura basata su microservizi può essere sviluppato, distribuito, eseguito e ridimensionato senza influenzare il funzionamento degli altri componenti. I servizi non condividono alcun codice o implementazione con gli altri.
 
+\subsubsection{Specificità}
+Ciascun servizio è progettato per una serie di capacità e si concentra sulla risoluzione di un problema specifico. Se nel tempo si decide di rendere un servizio più complesso, il servizio può essere scomposto in servizi più piccoli.
+
+\subsubsection{Eterogeneità delle Tecnologie}
+Durante lo sviluppo di un microservizio si ha totale libertà di scelta nell'utilizzo delle tecnologie. Ciascuna tecnologia viene decisa esclusivamente in base allo scopo del microservizio, senza basarsi sulla sua interazione con gli altri. Un microservizio può fare affidamento su un modello di database relazionale mentre un servizio con cui comunica su uno di tipo non relazionale, così come la loro logica può essere scritta in linguaggi differenti.
+
+\subsubsection{Semplicità di Distribuzione}
+Con i microservizi è possibile apportare una modifica a un singolo servizio e distribuirlo indipendentemente dal resto del sistema con tecniche di continuos delivery del tutto automizzate. Questo permette di rilasciare aggiornamenti più velocemente e in maniera più sicura.
+
+\subsubsection{Resilienza}
+La resilienza è la capacità di accettare la possibilità’ di errori e continuare a funzionare. Con i microservizi, le applicazioni possono gestire completamente gli errori di un servizio isolando la funzionalità senza bloccare l’intera applicazione.
+
+\subsubsection{Scalabilità}
+I microservizi consentono di scalare ciascun servizio in modo indipendente per rispondere alla richiesta delle funzionalità che un'applicazione supporta. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
