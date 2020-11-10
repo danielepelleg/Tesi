@@ -203,7 +203,7 @@ Ai primordi dello sviluppo applicativo, anche un cambiamento minimo  a un softwa
 
 \paragraph{Caratteristiche} Le applicazioni che seguono questo tipo di architettura sono di facile implementazione, in quanto tipicamente raccolte all'interno di un unico progetto e distribuite in un unico pacchetto. Questo tipo di architettura si presta bene per applicazioni piccole o comunque poco soggette a cambiamenti, ma la cosa cambia quando ci troviamo a sviluppare applicazioni complesse che richiedono continui aggiornamenti. Se uno di questi dovesse causare errori, l'unica soluzione sarebbe quella di \textit{disconnettere tutto} e fare un rollback totale del software: è chiaro che un'azienda non può permettersi tempi di inattività. L’unico modo di poter scalare un’applicazione monolitica è quello di replicare l’intera applicazione con conseguente aumento di costi e risorse necessarie. In seguito ai problemi derivanti da questo tipo di architettura, nacquero i primi studi di archittetture a servizi, sulla base di uno dei dogmi dell'ingegneria del software:
 
-\newtheorem*{defin}{Principio di Singola Responsabilità}
+\newtheorem{defin}{Principio di Singola Responsabilità}
 \begin{defin}
     Riunire le cose che cambiano per lo stesso motivo e separare quelle che cambiano per motivi diversi.
 \end{defin}

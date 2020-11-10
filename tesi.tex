@@ -1,8 +1,6 @@
 \documentclass[
-    trieste,
     corpo=11pt,
     twoside,
-    evenboxes,
 ]{toptesi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,15 +11,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % LIBRERIE
+\usepackage[classica]{topfront}     % frontespizio
 \usepackage[utf8]{inputenc}         % utf8
 \usepackage[italian]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 %\usepackage{textcomp}               % provide many text symbols
 %\usepackage{booktabs}
-\usepackage{graphicx}
+\usepackage{graphicx, wrapfig}
 \usepackage[a-1b]{pdfx}
-\usepackage[pdfa]{hyperref}
 \usepackage{minted}                 % coding language
 \usepackage{xurl}
 \usepackage{epigraph}
@@ -88,14 +86,14 @@
 \relatore{prof.\ Amoretti Michele}
 % RELATORE AGGIUNTIVO - PROF NOME E COGNOME
 % SE SI HA SOLO UN RELATORE ELIMINARE INSIEME AD AdvisorName
-\terzorelatore{prof.\ Prati Andrea}
+\secondorelatore{prof.\ Prati Andrea}
 %\terzorelatore{prof.\ Strozzi Fabio}
 
 % CANDIDATO - NOME E COGNOME
 \candidato{Daniele Pellegrini}[285240]
 
 % LOGO UNIVERSITA
-\logosede{images/logo.png}
+\logosede[125px]{images/logo.png}
 
 % AZIENDA E TUTORE AZIENDALE
 \tutoreaziendale{dott.\ ing.\ Strozzi Fabio}
@@ -179,7 +177,7 @@ In una società sempre più frenetica e in continuo movimento, l'idea di Zerocod
 
 % INCLUSIONE FILE CAPITOLI - COERENTE CON LISTA IN ALTO
 
-\include{chapters/stateofart.tex}
+\include{chapters/stateofart}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
