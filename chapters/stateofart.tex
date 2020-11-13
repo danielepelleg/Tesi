@@ -282,10 +282,17 @@ Di seguito esponiamo i \textit{sei principi per un'architettura REST}, per la pr
 
 \paragraph{3. Cache} Le Rest API devono essere progettate in modo da favorire l'utilizzo di date cachable. \emph{La richiesta di rete più efficiente è quella che non utilizza la rete.} In un 'architettura REST i messaggi di risposta dal servizio ai suoi consumatori sono esplicitamente etichettati come memorizzabili nella cache oppure non memorizzabili. In questo modo, il servizio, il consumatore o uno dei componenti intermediari possono memorizzare nella cache la risposta per il riutilizzo nelle richieste successive. Le richieste vengono passate attraverso un componente cache, che può riutilizzare le risposte precedenti per eliminare parzialmente o completamente alcune interazioni sulla rete.
 
-\paragraph{4. Interfaccia Uniforme}
+\paragraph{4. Interfaccia Uniforme} Il Client deve essere in grado di comunicare con il server usando un singolo linguaggio, indipendentemente dall'architettura di backend. Questo permette alle informazioni di essere trasferite in una forma standard.
 
-\paragraph{5. Sistema a strati}
+\begin{itemize}
+    \item \textbf{Identificazione delle Risorse} Una risorsa è un oggetto o la rappresentazione di qualcosa di significativo nel dominio applicativo. Il concetto di risorsa è quindi molto simile a quello di oggetto nel mondo della programmazione ad oggetti.
+    \item \textbf{Manipolazione delle risorse attraverso rappresentazioni} Una risorsa può essere rappresentata in molti modi diversi. Ad esempio come HTML, XML, JSON o anche come file JPEG. I client interagiscono con le risorse tramite le loro rappresentazioni, il che è un modo potente per mantenere i concetti di risorse astratti dalle loro interazioni.
+    \item \textbf{Hypermedia come motore dello stato dell’applicazione} L’applicazione deve essere guidata da collegamenti, consentendo ai clienti di scoprire risorse tramite collegamenti ipertestuali.
+\end{itemize}
 
-\paragraph{6. Codice su richiesta}
+\paragraph{5. Sistema a strati} In un sistema a livelli, componenti intermedi come i proxy possono essere collocati tra client e server.
+Uno dei vantaggi di un sistema a più livelli è che gli intermediari possono intercettare il traffico client-server per scopi specifici; ad esempio il caching, la sicurezza o l'autenticazione. Una soluzione basata su REST può essere composta da più livelli architettonici indipendenti l’uno dall’altro.
+
+\paragraph{6. Codice su richiesta} Vincolo opzionale. Richiede che il codice eseguibile possa essere trasmesso su richiesta creando un'applicazione che non dipende più esclusivamente dalla propria architettura. I problemi di sicurezza e l'eterogeneità dei linguaggi di programmazione tuttavia costituiscono un limite per l'adozione di questo vincolo.
 
 \subsection{Web Service SOAP}
