@@ -278,3 +278,4 @@ TSWLatexianTemp*
 # Directories
 /toptesi/*
 /_minted-tesi/*
+/chapters/*.aux

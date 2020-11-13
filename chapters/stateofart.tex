@@ -49,14 +49,14 @@ Nella figura gli oggetti sono rappresentati dagli esagoni, che contengono i dati
 
 \subsection{Java | Oracle}
 \setlength{\epigraphwidth}{.6\textwidth}
-\epigraph{<<The fact that you know Java doesn’t mean that you have the ability to transform that knowledge into well-designed object oriented systems>>}{Paul R. Reed}.
+\epigraph{<<The fact that you know Java doesn’t mean that you have the ability to transform that knowledge into well-designed object oriented systems>>}{Paul R. Reed}.\cite{reed:developingapplications}
 
 La nascita del linguaggio Java alla fine del XX secolo segnò un punto di svolta per la programmazione a oggetti. La prima grande rivoluzione introdotta da questo linguaggio fu quella di liberare il programmatore dall'onere della gestione della memoria, che prima era gestita mediante l'utilizzo dei puntatori. Grazie a un sistema chiamato \textbf{garbage collector}, Java è in grado di assegnare e rilasciare automaticamente la memoria in base alla gestione del programma. La seconda rivoluzione introdotta è legata alla Java Virtual Machine (JVM), grazie alla quale i programmi non sono più compilati in codice macchina, ma in una sorta di linguaggio macchina “intermedio” (chiamato bytecode) che non è destinato ad essere eseguito direttamente dall’hardware ma che deve essere, a sua volta, interpretato da un secondo programma, la macchina virtuale appunto. In questo modo lo stesso codice può essere eseguito su più piattaforme semplicemente trasferendo il bytecode (non il sorgente) purché sia disponibile una JVM. Questo concetto prende il nome di \textbf{WORA}, \textit{write once, run everywhere}. Java fu incorporato da diversi web browser per permettere l'utilizzo delle \textit{applet}, un'applicazione che può essere avviata dall'utente eseguendo il codice scaricato da un server web remoto. 
 
 \paragraph*{Perché Java?} Il linguaggio di programmazione è stata la prima decisione per un'ottimale azione di refactoring dell'applicazione e Java si è dimostrato essere il migliore per l'obiettivo dell'elaborato. Il rifacimento del backend è il primo passo sulla strada che porterà Zerocoda a un'evoluzione con conseguente inserimento in un panorama più ampio. Per questo motivo, la quasi totale indipendenza di Java dalla piattaforma hardware di esecuzione è una necessità chiave per l'applicazione, che così acquisisce una maggiore scalabilità. 
 
 \subsubsection{La popolarità}
-Prendendo in analisi i grafici offerti da TIOBE Programming Community Index, Java sembrerebbe essere al primo posto. Si tratta di un linguaggio facilmente manutenibile e dotato di molta documentazione che ne facilita l'apprendimento. Con le diverse librerie e framework compatibili è diventato il linguaggio di programmazione a oggetti più utilizzato al mondo, primo anche al precursore C++, dove la gestione della memoria e la curva di apprendimento possono rappresentare un problema. Java è stato adottato per la realizzazione del backend di diversi siti web di rilievo, come il sito d'asta e vendita online \textit{Ebay.com}.
+Prendendo in analisi i grafici offerti da \emph{TIOBE Programming Community Index} \cite{jansen:tiobe}, Java sembrerebbe essere al primo posto. Si tratta di un linguaggio facilmente manutenibile e dotato di molta documentazione che ne facilita l'apprendimento. Con le diverse librerie e framework compatibili è diventato il linguaggio di programmazione a oggetti più utilizzato al mondo, primo anche al precursore C++, dove la gestione della memoria e la curva di apprendimento possono rappresentare un problema. Java è stato adottato per la realizzazione del backend di diversi siti web di rilievo, come il sito d'asta e vendita online \textit{Ebay.com}.
 
 \subsubsection{Le motivazioni}
 Uno dei più grandi vantaggi offerti da questo linguaggio è proprio la sua capacità di addattamento ad aggiornamenti e modifiche del software in corso d'opera. Per capire meglio il perchè di questa scelta, facciamo riferimento al seguente esempio:
@@ -68,7 +68,7 @@ Si pensi ad un rivenditore di auto che ha vari veicoli nel suo parco mezzi. Ogni
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Database Relazionali}
-Nello svolgimeto di ogni attività, sia a livello individuale sia in organizazioni di ogni dimmensione, sono essenziali la disponibilità di informazioni e la capacità di gestirle in modo efficiente. [2] Un database relazionale è un tipo di database di archiviazione che fornisce accesso a data points tra i quali sussistono relazioni predefinite e che soddisfa queste esigenze. I database relazionali sono basati sul modello relazionale, un modello di rappresentazione dati semplice e diretto basato sull'utilizzo di tabelle.
+Nello svolgimeto di ogni attività, sia a livello individuale sia in organizazioni di ogni dimmensione, sono essenziali la disponibilità di informazioni e la capacità di gestirle in modo efficiente. \cite{book:basididati} Un database relazionale è un tipo di database di archiviazione che fornisce accesso a data points tra i quali sussistono relazioni predefinite e che soddisfa queste esigenze. I database relazionali sono basati sul modello relazionale, un modello di rappresentazione dati semplice e diretto basato sull'utilizzo di tabelle.
 
 \subsection{Modello Relazionale}
 Il modello relazionale si basa su due concetti: \textbf{relazione} e \textbf{tabella}. La nozione di \textit{relazione} proviene dalla matematica, in particolare dalla teoria degli insiemi, mentre il concetto di \textit{tabella} è intuitivo. Il punto di forza del modello di database relazionale è l'uso delle tabelle, che permettono di archiviare informazioni strutturate e accedervi, risultando comprensibili anche per gli utenti finali.
@@ -209,7 +209,7 @@ Ai primordi dello sviluppo applicativo, anche un cambiamento minimo  a un softwa
 \end{defin}
 
 \subsubsection{Cosa sono i Microservizi}
-L'architettura di microservizi rappresenta un'approccio all'avanguardia per lo sviluppo e l'organizzazione del software. Secondo questo stile, il software è composto da servizi indipendenti di piccole dimensioni che hanno come finalità lo svolgimento di un unico compito, e di farlo nel migliore dei modi. Ciascun microservizio, indipendente dagli altri, è dunque gestito da un unico team di sviluppo. Per una definizione più precisa riprendiamo le parole di Martin Fowler, considerato uno dei massimi esperti in materia, che afferma: \textit{<<Lo stile architetturale a microservizi è un approccio allo sviluppo di una singola applicazione come insieme di piccoli servizi, ciascuno dei quali viene eseguito da un proprio processo e comunica con un meccanismo snello, spesso una HTTP API.>>} [4]
+L'architettura di microservizi rappresenta un'approccio all'avanguardia per lo sviluppo e l'organizzazione del software. Secondo questo stile, il software è composto da servizi indipendenti di piccole dimensioni che hanno come finalità lo svolgimento di un unico compito, e di farlo nel migliore dei modi. \cite{amazon:microservices} Ciascun microservizio, indipendente dagli altri, è dunque gestito da un unico team di sviluppo. Per una definizione più precisa riprendiamo le parole di Martin Fowler, considerato uno dei massimi esperti in materia, che afferma: \textit{<<Lo stile architetturale a microservizi è un approccio allo sviluppo di una singola applicazione come insieme di piccoli servizi, ciascuno dei quali viene eseguito da un proprio processo e comunica con un meccanismo snello, spesso una HTTP API.>>} \cite{fowler:microservices}
 
 \subsection{Le origini}
 Il primo tentativo di architettura a servizi nasce con l’\texttt{architettura SOA}. Il concetto delle \textit{Service-Oriented Architecture} si afferma all’inizio degli anni Duemila come una collezione di servizi indipendenti che comunicano gli uni con gli altri tramite un \textit{Enterprise Service Bus (ESB)}. L’architettura a microservizi è una chiara \textbf{evoluzione dell’architettura SOA}, spinta dall’esigenza  di una sempre più’ marcata scalabilità, la quale permette di reggere il carico di milioni di utenti connessi in un determinato istante.
@@ -218,11 +218,11 @@ Il primo tentativo di architettura a servizi nasce con l’\texttt{architettura 
 Per studiare le differenze tra le due architettura facciamo riferimento al seguente schema:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/01_8_microservices_vs_soa.pdf}
+    \includegraphics[width=0.80\textwidth]{images/01_8_microservices_vs_soa.pdf}
     \caption{Architettura SOA e Microservizi }
     \label{fig:soavsmicroservices}
 \end{figure}
-\paragraph*{Granularità dei Servizi} Il numero dei servizi è un buon fattore per la differenziazione delle due architetture. Lo stesso Martin Fowler, citato precedentemente, afferma che in un'architettura SOA non si arriva neanche ad una decina di  servizi mentre in un architettura a microservice il numero dei servizi e’ molto più alto: basti pensare che il servizio di streaming Netflix ha dichiarato di fare uso di oltre di 700 microservizi. [5]
+\paragraph*{Granularità dei Servizi} Il numero dei servizi è un buon fattore per la differenziazione delle due architetture. Lo stesso Martin Fowler, citato precedentemente, afferma che in un'architettura SOA non si arriva neanche ad una decina di  servizi mentre in un architettura a microservice il numero dei servizi e’ molto più alto: basti pensare che il servizio di streaming Netflix ha dichiarato di fare uso di oltre di 700 microservizi. \cite{article:netflixmicroservices}
 
 \paragraph{Comunicazione} I microservizi abbandonano l’utilizzo di ESB, comunicando direttamente tra loro con meccanismi di comunicazione light. Nella SOA, l’ESB potrebbe diventare un singolo punto di errore che influisce sull’intero sistema. Poiché ogni servizio comunica attraverso l’ESB, se uno dei servizi rallenta, potrebbe ostruire l’ESB con le richieste per quel servizio. D’altra parte, i microservizi sono molto migliori nella tolleranza agli errori: se un microservizio presenta un errore di memoria, verrà interessato solo quel microservizio.
 
@@ -251,3 +251,41 @@ I microservizi consentono di scalare ciascun servizio in modo indipendente per r
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Representational State Transfer - REST}
+\subsection{Cos'è un'API}
+Un'\textit{Application Program Interface} può essere considerata come un \textsc{contratto} tra un fornitore di informazioni e l'utente destinatario di tali dati: l'API si limita a stabilire il contenuto richiesto dal consumatore (la chiamata) e il contenuto richiesto dal produttore (la risposta). Un'API funge quindi da elemento di intermediazione tra gli utenti e le risorse che questi intendono ottenere. È anche un mezzo con il quale un'organizzazione può condividere risorse e informazioni assicurando al contempo sicurezza e controllo, poiché stabilisce i criteri di accesso. L'utilizzo di un'API permette all'utente di rimanere all'oscuro delle specifiche con cui le risorse vengono recuperate o della loro provenienza.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{images/01_9_api.pdf}
+    \caption{Funzionamento delle API}
+    \label{fig:api}
+\end{figure}
+
+\subsection{L'architettura REST}
+Il Representational State Transfer è lo stile architetturale più popolare degli ultimi anni. Non si tratta di un protocollo nè tantomeno di una specifica (in quanto non fa riferimento a uno standard ufficiale), ma piuttosto di una serie di vincoli per la creazione di un servizio web che può servirsi di standard,  come HTTP, URI, JSON e XML. REST permette di \textit{accedere} e \textit{modificare} la \textbf{rappresentazione testuale di risorse}, attraverso una serie di \textbf{operazioni stateless} \textit{uniformi} e \textit{predefinite}. Generalmente basato su HTTP, permette di utilizzare anche altri protocolli di trasferimento come SNMP, SMTP, ecc\dots
+
+\paragraph{Perchè è conveniente?} L'utilizzo di API Rest fornisce una notevole quantità di libertà e flessibilità agli sviluppatori. Questo stile architetturale non richiede l'installazione di alcuna libreria (fatta eccezione per HTTP Client-Server e il JSON parser). Non vincola  chi lo sceglie a utilizzare una tecnologia, ma al contrario ne supporta diverse.
+
+\paragraph{Cosa la rende semplice?} L'informazione, o rappresentazione, viene consegnata in uno dei diversi formati tramite HTTP: JSON (Javascript Object Notation), HTML, XLT o testo semplice. Il formato JSON è uno dei più diffusi, perché indipendente dal linguaggio e facilmente leggibile da persone e macchine.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/01_10_restapi.pdf}
+    \caption{Funzionamento delle API Rest}
+    \label{fig:api}
+\end{figure}
+
+\subsubsection{Principi REST}
+Di seguito esponiamo i \textit{sei principi per un'architettura REST}, per la prima volta introdotti durante la dissertazione nella tesi di dottorato di Roy Fielding, uno dei principali autori delle specifiche dell'Hypertext Transfer Protocol (HTTP). \cite{fielding:restprinciples}
+
+\paragraph{1. Client-Server} Secondo questo principio, nello sviluppo di un'architettura REST Client e Server devono rimanere separati, in modo da potersi evolvere individualmente. Per questo motivo, si dice che rispetta il paradigma dell'informatica noto come \textbf{Separation of Concerns (SoC)}, traducibile in italiano come \emph{suddivisione dei compiti}. Secondo il principio SoC il sistema deve essere diviso in moduli distinti, ciascuno dedito allo svolgimento di un proprio compito, supportando in tal modo l’evoluzione indipendente della logica lato client e della logica lato server. Secondo questo vincolo il server deve offrire una o più funzionalità e ascoltare le richieste di possibili client. Un client deve invocare il servizio messo a disposizione dal server inviando il corrispondente messaggio di richiesta. Il servizio lato server a questo punto respinge la richiesta o esegue l’attività richiesta prima di inviare un messaggio di risposta al client. La gestione delle eccezioni è delegata al client.
+
+\paragraph{2. Stateless} Con questo termine si fa riferimento al tipo di operazioni. Le singole invocazioni delle API Rest non devono fare affidamento alle risorse presenti sul server, ma esclusivamente sui dati forniti nella stessa richiesta. Nel client non è previsto un sistema di memorizzazione delle informazioni delle richieste, ciascuna di queste è distinta e non connessa. Ciò garantisce una forte scalabilità, riducendo l'utilizzo di memoria sul server.
+
+\paragraph{3. Cache} Le Rest API devono essere progettate in modo da favorire l'utilizzo di date cachable. \emph{La richiesta di rete più efficiente è quella che non utilizza la rete.} In un 'architettura REST i messaggi di risposta dal servizio ai suoi consumatori sono esplicitamente etichettati come memorizzabili nella cache oppure non memorizzabili. In questo modo, il servizio, il consumatore o uno dei componenti intermediari possono memorizzare nella cache la risposta per il riutilizzo nelle richieste successive. Le richieste vengono passate attraverso un componente cache, che può riutilizzare le risposte precedenti per eliminare parzialmente o completamente alcune interazioni sulla rete.
+
+\paragraph{4. Interfaccia Uniforme}
+
+\paragraph{5. Sistema a strati}
+
+\paragraph{6. Codice su richiesta}
+
+\subsection{Web Service SOAP}

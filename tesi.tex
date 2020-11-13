@@ -23,6 +23,8 @@
 \usepackage{minted}                 % coding language
 \usepackage{xurl}
 \usepackage{epigraph}
+\usepackage[babel]{csquotes}
+\usepackage[backend=biber,bibencoding=ascii,sorting=none]{biblatex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -51,6 +53,9 @@
 
 % DA ABILITARE PER DOCUMENTI LATEX IN ITALIANO
 \frenchspacing
+
+% FILE DI BIBLIOGRAFIA
+\addbibresource{bibliography.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -93,7 +98,7 @@
 \candidato{Daniele Pellegrini}[285240]
 
 % LOGO UNIVERSITA
-\logosede[125px]{images/logo.png}
+\logosede[125px]{images/logoUnipr.png}
 
 % AZIENDA E TUTORE AZIENDALE
 \tutoreaziendale{dott.\ ing.\ Strozzi Fabio}
@@ -182,9 +187,9 @@ In una società sempre più frenetica e in continuo movimento, l'idea di Zerocod
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % BIBLIOGRAFIA
-%\phantomsection
-%\addcontentsline{toc}{chapter}{\refname}
-%\nocite{*}
-%\printbibliography
+\phantomsection
+\addcontentsline{toc}{chapter}{\refname}
+\nocite{*}
+\printbibliography
 
 \end{document}
