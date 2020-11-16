@@ -73,8 +73,8 @@ Lo scopo di quest'applicazione è quello di \textit{velocizzare l'accesso i serv
 \paragraph{I servizi} possono essere diversi: analisi, esami, visite mediche, qualsiasi servizio che preveda un'attesa del cliente potrebbe essere inserito da una struttura sanitaria. Selezionando un servizio, all'utente viene mostrato il relativo calendario di disponibilità, i termini di giorni e fasce orarie. 
 \paragraph{La prenotazione} avviene una volta selezionato un orario (corrispondente a uno \emph{slot}) e confermata l'intenzione di volerlo riservare. Prima di confermare, l'utente registrato può scegliere di inserire i dati (almeno uno tra nome e cognome, email o numero di telefono) di un altro utente, anche non iscritto al sistema, per cui prenotare il servizio. Scegliendo questa il destinatario sarà informato mediante delle notifiche sui futuri eventi relativi allo stato della sua prenotazione. A questo punto all'utente viene fornito un ``biglietto virtuale''.
 \paragraph{Il biglietto} consiste in una numerazione. Questa numerazione corrisponde al numero che verrà chiamato allo sportello (si pensi ad un biglietto virtuale staccato al momento della prenotazione). Ciascun servizio è identificato da una lettera dell’alfabeto (A, B, C, \dots) mentre ciascun numero identifica il cliente in coda (1, 2, 3, \dots). In questo modo la numerazione B12, ad esempio, fa riferimento al cliente numero 12 di un servizio, C13 ad un altro cliente di un altro servizio. L’idea è che chi ha prenotato acceda alla struttura nel momento esatto in cui viene erogato il servizio, evitando coda e assembramenti.
-
 \paragraph{La struttura}, così come l’utente, deve avere informazione di questo biglietto virtuale e questo avviene attraverso un \textsl{software} installato nelle strutture che prende il nome di \textbf{mru}.
+\paragraph{L'MRU} è un software che disponde di un'interfaccia web per gli operatori e per i totem che vengono utilizzati. Tutte le notti l'MRU interroga Zerocoda richiedendo le prenotazioni per la giornata odierna. Se ci sono le scarica, in questo modo anche gli operatori hanno informazione delle prenotazioni.
 
 \subsection{Use Case Diagram}
 \begin{figure}[H]
@@ -88,10 +88,15 @@ I diversi colori utilizzati rappresentano la \textit{divisione in servizi} scelt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Analisi dell'Applicazione}
 \subsection{I diversi Enti di Zerocoda}
-Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi enti. Alcuni di questi, tuttavia, non sono presenti sul sito. Ci sono strutture sanitarie che non vogliono che i loro utenti accedano a un sito generalista come \textsf{Zerocoda.it}. Questi vogliono che il loro sito funga da ``vetrina'', che l'utente riconosca la struttura presso cui prenota attraverso elementi come il logo, il nome della struttura, ecc\dots L'utilizzo del \textbf{virtual hosting} risponde a questa esigenza. In fase di accesso il servizio compare come se fosse erogato dell’ente privato. I \textit{siti premium} consistono in realtà in un sito statico (come lo stesso Zerocoda), ma con una configurazione dedicata, che una volta ricevuta dal browser cambia il \textsf{look and feel}. 
+Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi enti. Alcuni di questi, tuttavia, non sono presenti sul sito. Ci sono strutture sanitarie che non vogliono che i loro utenti accedano a un sito generalista come \textsf{Zerocoda.it}. Questi vogliono che il loro sito funga da ``vetrina'', che l'utente riconosca la struttura presso cui prenota attraverso elementi come il logo, il nome, ecc\dots L'utilizzo del \textbf{virtual hosting} risponde a questa esigenza. In fase di accesso il servizio compare come se fosse erogato dell’ente privato. Questi \textit{siti premium} consistono in realtà in un sito statico (come lo stesso Zerocoda), ma con una configurazione dedicata, che una volta ricevuta dal browser cambia il \textsf{look and feel}.
+
+\paragraph{É possibile offrire una  personalizzazione maggiore} ai siti che la richiedono. La richiesta può essere quella dell'utilizzo di colori particolari per gli elementi della pagina: quali pulsanti, form, colori del background.
+
+\paragraph{La configurazione} consiste in un file JSON contenente tutte le informazioni del sito. Oltre alle informazioni relative al nome, indirizzo, descrizione, contiene anche stringhe di testo già formattate in HTML, da inserire all'interno della pagina in appositi spazi. Può contenere anche informazioni riguardanti lo stile (CSS) della pagina. La configurazione viene caricata per ultima, dopo che i componenti statici sono stati renderizzati. Viene inviata al frontend attraverso uno script JavaScript.
 
 \paragraph{In numeri}, i clienti (enti sanitari) per Zerocoda sono 45. Il numero comprende sia gli enti presenti su Zerocoda, sia coloro che hanno richiesto una personalizzazione su un proprio portale. Il sistema, in totale vanta i seguenti numeri:
 \begin{itemize}
+    \item 1 Zerocoda
     \item 17 siti con configurazione personalizzata
     \item 500.000 utenti registrati
     \item 298 impianti di MRU registrati
@@ -99,7 +104,7 @@ Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi e
 
 
 \subsection{Multitenancy e Virtual Hosting}
-La particolarità del sistema è quella di essere \textbf{multitenant}. Con un solo servizio è possibile offfrire esperienze isolate agli utenti: una diversa esperienza sulla base della loro organizzazione. In questo modo, se un nuovo ente richiedesse che tutti i suoi dati fossero salvati su un nuovo database, si potrebbe installare un nuovo ambiente separato apposito.
+La particolarità del sistema è quella di essere \textbf{multitenant}. Con un solo servizio è possibile offfrire esperienze isolate agli utenti: una diversa esperienza sulla base della loro organizzazione. In questo modo, se un nuovo ente richiedesse che tutti i suoi dati fossero salvati su un nuovo database, si potrebbe installare un nuovo ambiente separato apposito. In alcuni casi è possibile anche chiedere metodi di registrazione o accesso al sistema ad-hoc, evitando il sistema standard basato su email e password. Così facendo, il sistema si limiterebbe ad esporre un'API in aggiunta all'applicazione condivisa da tutti, che gestisce la richiesta di autenticazione personalizzata sulle necessità dell'ente richiedente.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.94\textwidth]{images/02_3_multitenancy.pdf}
@@ -107,8 +112,24 @@ La particolarità del sistema è quella di essere \textbf{multitenant}. Con un s
     \label{fig:multitenancy}
 \end{figure}
 
-\subsection{Scenario del Backend}
+\subsection{Backend Overview}
 Ad oggi non è attualmente presente un elemento definibile come \emph{layer di API} nell’applicazione. Il sistema è composto da un unico monolite che tra le tante mansioni che ha espone anche le `API'. Nello stesso sistema viene effettuato ogni genere di controllo per quanto rigurarda l'autenticazione e i parametri passati nelle richieste. Il backend è interamente scritto in PHP e si appoggia ad un database MySQL. Nonostante con gli ultimi aggiornamenti PHP offra la possibilità di programmare a oggetti, questo non è il caso del sistema preso in analisi. Per la creazione di dati che in altri linguaggi sarebbero rappresentabili attraverso oggetti, il backend utilizza un sistema di liste con elementi di tipo chiave-valore.
+
+\subsection{Chiamate delle API}
+Le chiamate dal frontend alle API intercettano il click sul documento, andando a cercare il componente su cui è stata registrata l'interazione. Tutte le richieste inviate al backend sono richieste GET HTTP. Quindi, passando un qualsiasi parametro o effettuanto operazioni di aggiunta o modifica di dati, i parametri vengono aggiunti all'url, e mostrati in chiaro. Questo scelta è stata adottata anche per i metodi di registrazione e autenticazione, i più delicati dal punto di vita della sicurezza. Con la sintassi \textsl{\$\_GET} in PHP si fa riferimento a una variabile globale che contiene i parametri in GET della richiesta HTTP.
+\begin{figure}[H]
+\begin{alltt}
+    \centering
+    http://domain.it/index.php/api/v1/login?
+    \centering
+    _apikey=1&
+    &email=prova123%40gmail.com&
+    password=Prova123!
+\end{alltt}
+\caption{Richiesta GET in HTTP}
+\end{figure}
+
+(tipicamente i paraemtri dell'URL). Questa variabile tuttavia può anche contenere altri dati che è possibile aggiungere. L'ID ad esempio è parte di quei dati aggiunti dal framework che non si troverà nella richiesta in INPUT.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
