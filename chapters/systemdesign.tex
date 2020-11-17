@@ -116,23 +116,46 @@ La particolarità del sistema è quella di essere \textbf{multitenant}. Con un s
 Ad oggi non è attualmente presente un elemento definibile come \emph{layer di API} nell’applicazione. Il sistema è composto da un unico monolite che tra le tante mansioni che ha espone anche le `API'. Nello stesso sistema viene effettuato ogni genere di controllo per quanto rigurarda l'autenticazione e i parametri passati nelle richieste. Il backend è interamente scritto in PHP e si appoggia ad un database MySQL. Nonostante con gli ultimi aggiornamenti PHP offra la possibilità di programmare a oggetti, questo non è il caso del sistema preso in analisi. Per la creazione di dati che in altri linguaggi sarebbero rappresentabili attraverso oggetti, il backend utilizza un sistema di liste con elementi di tipo chiave-valore.
 
 \subsection{Chiamate delle API}
-Le chiamate dal frontend alle API intercettano il click sul documento, andando a cercare il componente su cui è stata registrata l'interazione. Tutte le richieste inviate al backend sono richieste GET HTTP. Quindi, passando un qualsiasi parametro o effettuanto operazioni di aggiunta o modifica di dati, i parametri vengono aggiunti all'url, e mostrati in chiaro. Questo scelta è stata adottata anche per i metodi di registrazione e autenticazione, i più delicati dal punto di vita della sicurezza. Con la sintassi \textsl{\$\_GET} in PHP si fa riferimento a una variabile globale che contiene i parametri in GET della richiesta HTTP.
+Le chiamate dal frontend alle API intercettano il click sul documento, andando a cercare il componente su cui è stata registrata l'interazione. Tutte le richieste inviate al backend sono richieste GET HTTP. Quindi, passando un qualsiasi parametro o effettuando operazioni di aggiunta o modifica di dati, i parametri vengono aggiunti all'url, e mostrati in chiaro. Questo scelta è stata adottata anche per i metodi di registrazione e autenticazione, i più delicati dal punto di vita della sicurezza. Con la sintassi \texttt{\$\_GET} in PHP si fa riferimento a una variabile globale che contiene i parametri in GET della richiesta HTTP.
 \begin{figure}[H]
 \begin{alltt}
     \centering
     http://domain.it/index.php/api/v1/login?
     \centering
     _apikey=1&
-    &email=prova123%40gmail.com&
+    email=prova123%40gmail.com&
     password=Prova123!
 \end{alltt}
-\caption{Richiesta GET in HTTP}
+\caption{Esempio di richiesta GET in HTTP}
+\end{figure}
+Prendendo in analisi la seguente richiesta di login, nell'url sono presenti i parametri \textsl{email} e \textsl{password} utilizzati per autenticare l'utente. Questi dati sensibili \textit{non dovrebbero appartenere all'url} dove sono visibili, ma andrebbero passati nel \textsc{body} di una richiesta. Con la variabile \texttt{\$\_GET} in PHP è dunque possibile accedere anche a questi parametri.
+
+\subsubsection{Scenario}
+Il sistema, per capire quale API è stata chiamata, ricerca il metodo della richiesta passando il parametro \texttt{\$\_GET} all'interno di un costrutto condizionale di grandi dimensioni e verificando ogni chiamata possibile. Quando il valore del parametro corrisponde al nome del metodo chiamato, nello stesso ciclo richiama l'operazione richiesta. Risulta facile notare che il codice, implementato in questo modo, presenta diversi lati negativi. Vengono ripetute parti di codice, i parametri vengono istanziati dentro ciascun \textsc{if statement} e passati ai metodi che ne richiedono l'utilizzo: tutto questo all'interno della stessa condizione. Infine, i risultati di ciascuna chiamata vengono istanziati all'interno di array.
+\usemintedstyle{pastie}
+\begin{figure}
+    \inputminted[firstline=2, lastline=15]{octave}{src/examples/old_api_call.php}
+    \caption{Struttura delle chiamate Api}
 \end{figure}
 
-(tipicamente i paraemtri dell'URL). Questa variabile tuttavia può anche contenere altri dati che è possibile aggiungere. L'ID ad esempio è parte di quei dati aggiunti dal framework che non si troverà nella richiesta in INPUT.
+\subsection{Same Origin Policy}
+Un'origine è definita da un \textit{protocollo}, un \textit{dominio} e una \textit{porta} di un URL. Più in generale, i documenti appartenenti a pagine web differenti sono isolati gli uni dagli altri. L'intento di questa politica è quello di consentire l'accesso a siti non sicuri, ma senza che quest'ultimi abbiano la possibilià di interferire con la sessione di chi naviga su un sito sicuro. \cite{w3c:sop}
+
+\paragraph{I controlli} di origine vengono applicati dal browser in ogni caso di potenziale interazione tra elementi di origini diverse. Questo include, ma non è limitato a:
+\begin{itemize}
+    \item Codice JavaScript e Document Object Model (DOM)
+    \item Cookies
+    \item Chiamate AJAX (XmlHTTPRequest)
+\end{itemize}
+
+\subsubsection{Chiamate AJAX}
+L'\emph{Asynchronous JavaScript and XML} è ad oggi la tecnica più utilizzata per sviluppare applicazioni web interattive. Il concetto che sta alla base di una chiamata AJAX è quello di \textit{poter scambiare dati tra client e server senza ricaricare la pagina}: lo scambio avviene in background tramite una chiamata asincrona dei dati di solito utilizzando l’oggetto \textsl{XMLHttpRequest}. Il framework \textbf{JQuery} semplifica notevolmente l'implementazione di chiamate di questo tipo, e a ciò deve la sua fama.
+
+\subsubsection{Cross Origin Resource Sharing - CORS}
+In alcuni casi, lavorare con domini differenti che interagiscono tra loro può rivelarsi \textit{una necessità}. Quando ciò accade, \textit{è possibile allentare la Same Origin Policy} in modo che non ostacoli le funzionalità di interazione tra domini dell’applicazione web. Ciò può essere fatto in diversi modi, ad esempio dichiarando l'origine utilizzando JavaScript, l'intestazione di una chiamata, o stabilendo un sistema di autenticazione tra le due parti. Questa procedura prende il nome di \textit{Cross-Origin Resource Sharing}. L'utilizzo di questo meccanismo può fare a caso  nostro per quanto riguarda le chiamate delle API di Zerocoda (che si trovano su un dominio differente rispetto a quello della pagina web), tuttavia in fase di sviluppo non era stato pensato, e i precedenti sviluppatori hanno elaborato un modo per aggirare il problema, piuttosto che eliminarlo alla radice. In fase di analisi si è tenuto conto di questo aspetto, pertanto durante l'implementazione si lavorerà alla stesura di API su un differente dominio, garantendone l'accesso e dichiarando affidabili le origini necessarie.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\section{Architettura del Sistema}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
