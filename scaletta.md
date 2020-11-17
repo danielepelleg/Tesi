@@ -7,6 +7,7 @@
     * Le origini
     * Definizione
     * Java | Oracle
+
 * Database Relazionali
     * Modello Relazionale
     * Struttura
@@ -27,17 +28,25 @@
 ## Progettazione del Sistema
 * Reverse Engineering
     * I motivi
+
 * Modello di Sviluppo
     * Waterfall Model 
+
 * Funzionamento dell'Applicazione
+    * Scenario
+    * Use Case Diagram
+    * I diversi Enti Zerocoda
+
 * Analisi dell'Applicazione
     * Scenario Backend
     * Chiamate delle API
     * Cross Origin Policy
+
 * Architettura del Sistema
     * Virtual Hosting
     * JSONP
     * Autenticazione
+    
 * Struttura del Database
     * Ridondanza dati
     * Tabelle di configurazione
