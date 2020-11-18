@@ -103,7 +103,7 @@ Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi e
 \end{itemize}
 
 
-\subsection{Multitenancy e Virtual Hosting}
+\subsection{Multitenancy}
 La particolarità del sistema è quella di essere \textbf{multitenant}. Con un solo servizio è possibile offfrire esperienze isolate agli utenti: una diversa esperienza sulla base della loro organizzazione. In questo modo, se un nuovo ente richiedesse che tutti i suoi dati fossero salvati su un nuovo database, si potrebbe installare un nuovo ambiente separato apposito. In alcuni casi è possibile anche chiedere metodi di registrazione o accesso al sistema ad-hoc, evitando il sistema standard basato su email e password. Così facendo, il sistema si limiterebbe ad esporre un'API in aggiunta all'applicazione condivisa da tutti, che gestisce la richiesta di autenticazione personalizzata sulle necessità dell'ente richiedente.
 \begin{figure}[H]
     \centering
@@ -173,9 +173,25 @@ A livello di file system si ha uno spazio condiviso per il backend (interamente 
 Con le caratteristiche attuali Apache2 funziona esclusivamente da Web Server.
 
 \subsection{Virtual Hosting}
+Non tutti i siti hanno abbastanza traffico da giustificare il costo di un web server dedicato, pertanto la loro condivisione su un singolo web server può essere una buona soluzione per abbassarne il costo. Il \emph{virtual hosting} viene incontro a questa esigenza, permettendo ad un unico server web di “ospitare” più siti (e/o applicazioni) web, i quali condivideranno, secondo opportune politiche di gestione, le risorse di elaborazione del server stesso. Consolidare più servizi su un’unica macchina è una pratica comunemente adottata poiché permette di ottimizzare l’utilizzo delle risorse hardware disponibili. Senza il virtual hosting, si renderebbe necessario attivare una nuova macchina server per ogni nuovo sito o applicazione web, con un conseguente aumento dei costi ed un possibile sottoutilizzo delle risorse hardware. Con l'attuale architettura \textit{Apache ospita al suo interno una serie di virtual host}.
+
+\paragraph{Funzionamento} Il server Apache, con un unico indirizzo IP, ospita più di un nome di dominio. I diversi domini condividono la stessa porta, ma si può anche assegnare a ciascun dominio una porta specifica.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/02_5_virtual_hosting.pdf}
+    \caption{Funzionamento del Virtual Hosting}
+    \label{fig:virtualhosting}
+\end{figure}
 
 \subsection{Database MySQL}
+Il dialogo con il database avviene attraverso il codice PHP del backend. E' compito del server Apache fornirne l'accesso per una serie di indirizzi (API). Il database è unico per tutti gli enti Zerocoda, anche gli enti `premium' interrogano la stessa base di dati degli altri. Coloro che hanno richiesto un metodo di accesso diverso da quello standard hanno una tabella isolata dagli altri, contenente i dati dei propri utenti. Poiché questa tipologia di enti ha gli utenti su una tabella diversa, avrà anche API apposite per interrogarla. Questa API si trova sempre all'interno dello stesso backend, insieme alle altre.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Limiti del Database}
+La struttura del database non corrisponde a quella che ci si aspetterebbe in un tipico sistema di prenotazioni utente. Nel database sono infatti contenute diverse tabelle di verifica per il sistema. Non è presente nessuna struttura intermediaria tra client e server che si occupi di fare i controlli necessari per la verifica delle api keys e dei token utente, pertanto queste operazioni si traducono in delle semplici query alla base di dati. Inoltre, sul database vengono salvati anche i log riguardanti il funzionamento dello stesso: è logico dedurre che, in caso di malfunzionamento, non c'è modo di verificare questi documenti.
+
+\paragraph{}Oltre a quelle di verifica, il database presenta anche diverse tabelle di configurazione. Queste vengono per lo più utilizzate in fase di amministrazione dal backoffice.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
