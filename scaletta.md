@@ -20,13 +20,9 @@
     * Caratteristiche
 * Web Services e API
     * Representational State Transfer - REST
-    * Simple Object access Protocol
+    * Web Services
 
-### 2. Progettazione del Sistema
-* Reverse Engineering
-    * I motivi
-* Modello di Sviluppo
-    * Waterfall Model 
+### 2. Architettura Funzionale del Sistema
 * Funzionamento dell'Applicazione
     * Scenario
     * Use Case Diagram
@@ -35,13 +31,38 @@
     * Scenario Backend
     * Chiamate delle API
     * Cross Origin Policy
-* Architettura del Sistema
+* Architettura Odierna
+    * Web Server Apache
     * Virtual Hosting
-    * JSONP
-    * Autenticazione
+    * Database MySQL
 * Limiti del Database
+    * Autenticazione
+    * Verifica delle Api Keys
     * Ridondanza dati
-    * Tabelle di configurazione
-    * Vincoli di integrità referenziale
+    * Vincoli di Integrità
+* Reverse Engineering
+    * I motivi
+* Modello di Sviluppo
+    * Waterfall Model 
+* Nuova Architettura
+    * Reverse Proxy
+    * Authentication Server
+    * Gateway
+* Architettura Ideale
+
+### 3. Implementazione
+* Documentazione
+    * Swagger UI
+* Spring Framework
+    * Annotazioni
+* MyBatis
+    * Mapping e Configurazione
+* Struttura del Progetto
+    * DTO
+    * DAO
+    * Rest Services
+
 
 ### Conclusione
+* Performance Test
+    * JMeter
