@@ -45,9 +45,9 @@
 * Modello di Sviluppo
     * Waterfall Model 
 * Nuova Architettura
-    * Reverse Proxy
-    * Authentication Server
-    * Gateway
+    * Monolite
+    * Scenario
+    * Microservizi
 * Architettura Ideale
 
 ### 3. Implementazione
