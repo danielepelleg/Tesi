@@ -1,18 +1,18 @@
-\chapter{Progettazione del Sistema}
+\chapter{Architettura Funzionale del Sistema}
 \label{chap:systemdesign}
-In questo capito si illustrerà il funzionamento attuale del sistema, analizzando le tecnologie che utilizza e accennando alle soluzioni pensate per ogni specifico problema. Inoltre si presenterà il modello di sviluppo dell'\emph{ingegneria del software} seguito.
+In questo capito è illustrato il funzionamento attuale del sistema e le tecnologie che utilizza, con cenni riguardenti le soluzioni pensate per ogni specifico problema. Vengono presentate l'architettura del sistema di partenza e quella di arrivo, in riferimento al modello di sviluppo dell'\emph{ingegneria del software} seguito.
 
 \section{Reverse Enginering}
 \newtheorem*{def:reverseengineering}{Definizione}
 \begin{def:reverseengineering}
-    La reingegnerizzazione è quel processo di esame, analisi e alterazione di un sistema software esistente, col fine di ricostruirlo in una nuova forma, e la successiva implementazione. \cite{chikofsky:reverseengineering} Nel processo di reingegnerizzazione è compresa anche la riprogettazione del software, mentre quando si parla di reverse engineering si fa riferimento alla sola analisi.
+    La reingegnerizzazione è quel processo di esame, analisi e alterazione di un sistema software esistente, col fine di ricostruirlo in una nuova forma, e la successiva implementazione. \cite{chikofsky:reverseengineering} Nel processo di reingegnerizzazione è compresa anche la riprogettazione del software, mentre quando si parla di reverse engineering si fa riferimento all'analisi.
 \end{def:reverseengineering}
 Il reverse engineering del codice permette di invertire i processi di sviluppo e produzione di un software e quindi di ottenere uno sguardo prezioso dietro le quinte di un programma. Attraverso lo studio dettagliato del codice sorgente è possibile comprendere, riscrivere o ricostruire l’architettura di un programma, il suo funzionamento e le sue strutture interne. Apparentemente la reingegnerizzazione non dovrebbe essere fatta per modificare i requisiti funzionali del sistema. In realtà, spesso quando si applica questa tecnica ci si accorge, in fase di riprogettazione, che alcuni requisiti, dopo anni di sviluppo, non sono più validi e andrebbero tolti dal disegno, mentre altri, nuovi, andrebbero introdotti.
 
 \subsection{I motivi}
-La pandemia di quest'ultimo anno ha portato l'azione di refactoring su \emph{Zerocoda} ad essere a tutti gli effetti una necessità. Il distanziamento sociale è un bisogno per ogni tipo servizio offerto ad una clientela più o meno vasta, e tenere traccia dei clienti e del loro numero temporizzando gli accessi al servizio è senza alcun dubbio la soluzione migliore. Nello stato attuale, tuttavia, l'applicazione non rispetta i requisiti funzionali per essere rilasciata ad un pubblico di tipo \emph{enterprise}. Sono sempre di più le azienda che hanno richiesto l'inserimento dei loro servizi nell'applicazione. L'inserimento di nuovi servizi porterebbe all'aumento delle richieste da parte dei client, più richieste a più dati da elaborare, e più dati a un sovraccarico. L'applicazione non è pronta a uno scenario di questo tipo, pertanto urge un refactoring mirato all'introduzione di nuove tecnologie, che renda il software più scalabili, in prevenzione al nuovo numero di clienti sulla piattaforma.
+La pandemia di quest'ultimo anno ha portato l'azione di refactoring su \emph{Zerocoda} ad essere a tutti gli effetti una necessità. Il distanziamento sociale è un bisogno per ogni tipo servizio offerto ad una clientela più o meno vasta, e tenere traccia dei clienti e del loro numero temporizzando gli accessi al servizio è senza alcun dubbio la soluzione migliore. Nello stato attuale, tuttavia, l'applicazione non rispetta i requisiti funzionali per essere rilasciata ad un pubblico di tipo \emph{enterprise}. Sono sempre di più le aziende che hanno richiesto l'inserimento dei loro servizi nell'applicazione. L'inserimento di nuovi servizi porterebbe all'aumento delle richieste da parte dei client, più richieste a più dati da elaborare, e più dati a un sovraccarico. L'applicazione non è pronta a uno scenario di questo tipo, pertanto urge un refactoring mirato all'introduzione di nuove tecnologie, che renda il software più scalabile in prevenzione del nuovo numero di clienti sulla piattaforma.
 
-Questo tuttavia rappresenta solo uno dei motivi, il principale, quello che ha portato l'azione di refactoring, dapprima solo ipotizzata da coloro che già lavoravano al sistema, a un inizio di progettazione. Normalmente le esigenze possono essere anche altre:
+Questo rappresenta il motivo principale, quello che ha portato l'azione di refactoring, dapprima solo ipotizzata da coloro che già lavoravano al sistema, a un inizio di progettazione. Normalmente le esigenze possono essere anche altre:
 
 \begin{itemize}
     \item il team di sviluppo è cambiato e sono subentrati altri programmatori che non hanno conoscenze in merito al sistema;
@@ -47,7 +47,7 @@ Lo sviluppo del modello viene attribuito allo scienziato informatico Winston W. 
 Il modello a cascata si ispira alle fasi definite da Royce, ma prevede solo un’iterazione.
 
 \subsubsection{Funzionamento}
-Nella pratica vengono utilizzate diverse versioni del modello a cascata. Attualmente sono in uso modelli che suddividono i processi di sviluppo in cinque fasi. Le fasi 1, 2 e 3, definite da Royce, sono riunite in un’unica fase di progetto, chiamata analisi dei requisiti.
+Nella pratica vengono utilizzate diverse versioni del modello a cascata. Attualmente sono in uso modelli che suddividono i processi di sviluppo in cinque fasi. Le fasi 1, 2 e 3, definite da Royce, sono riunite in un’unica fase di progetto, chiamata analisi dei requisiti. [\ref{fig:waterfallmodel}]
 \begin{enumerate}
     \item Analisi: pianificazione, analisi e specificazione dei requisiti
     \item Progettazione: progettazione e specificazione del sistema
@@ -69,11 +69,11 @@ Il modello da noi utilizzato rappresenta un'\textit{estensione del modello a cas
 
 \subsection{Scenario}
 Lo scopo di quest'applicazione è quello di \textit{velocizzare l'accesso i servizi}. Senza questo \textit{primo requisito}, l'applicazione non troverebbe posto nel mondo enterprise. Per questo motivo, l'interfaccia utente risulta semplice, e comprende poche funzionalità. 
-\paragraph{L'utente} per accedere ai servizi deve registrarsi al sistema fornendo i propri dati personali (che potranno essere modificati in qualsiasi momento), scegliendo un'email e una password per le future autenticazioni. Una volta registrato, può cercare una struttura tra quelle presenti e scegliere un servizio che questa eroga. 
-\paragraph{I servizi} possono essere diversi: analisi, esami, visite mediche, qualsiasi servizio che preveda un'attesa del cliente potrebbe essere inserito da una struttura sanitaria. Selezionando un servizio, all'utente viene mostrato il relativo calendario di disponibilità, i termini di giorni e fasce orarie. 
-\paragraph{La prenotazione} avviene una volta selezionato un orario (corrispondente a uno \emph{slot}) e confermata l'intenzione di volerlo riservare. Prima di confermare, l'utente registrato può scegliere di inserire i dati (almeno uno tra nome e cognome, email o numero di telefono) di un altro utente, anche non iscritto al sistema, per cui prenotare il servizio. Scegliendo questa il destinatario sarà informato mediante delle notifiche sui futuri eventi relativi allo stato della sua prenotazione. A questo punto all'utente viene fornito un ``biglietto virtuale''.
+\paragraph{L'utente} per accedere ai servizi deve registrarsi al sistema fornendo i propri dati personali (che potranno essere modificati in qualsiasi momento), scegliendo un'email e una password per le future autenticazioni. Anche senza essere registrato può cercare una struttura tra quelle presenti e scegliere un servizio che questa eroga. 
+\paragraph{I servizi} possono essere diversi: analisi, esami, visite mediche, qualsiasi servizio che preveda un'attesa del cliente potrebbe essere inserito da una struttura sanitaria. Selezionando un servizio, all'utente viene mostrato il relativo calendario di disponibilità, in termini di giorni e fasce orarie. 
+\paragraph{La prenotazione} avviene una volta selezionato un orario (corrispondente a uno \emph{slot}) e confermata l'intenzione di volerlo riservare. Per fare quest'operazione è necessario che l'utente sia autenticato al sistema. Prima di confermare la prenotazione di uno slot, l'utente può scegliere se inserire i dati (almeno uno tra nome e cognome, email o telefono) di un altro utente, anche non iscritto al sistema, per cui prenotare il servizio. Scegliendo questa opzione il destinatario sarà informato mediante delle notifiche sui futuri eventi relativi allo stato della sua prenotazione. A questo punto all'utente viene fornito un ``biglietto virtuale''.
 \paragraph{Il biglietto} consiste in una numerazione. Questa numerazione corrisponde al numero che verrà chiamato allo sportello (si pensi ad un biglietto virtuale staccato al momento della prenotazione). Ciascun servizio è identificato da una lettera dell’alfabeto (A, B, C, \dots) mentre ciascun numero identifica il cliente in coda (1, 2, 3, \dots). In questo modo la numerazione B12, ad esempio, fa riferimento al cliente numero 12 di un servizio, C13 ad un altro cliente di un altro servizio. L’idea è che chi ha prenotato acceda alla struttura nel momento esatto in cui viene erogato il servizio, evitando coda e assembramenti.
-\paragraph{La struttura}, così come l’utente, deve avere informazione di questo biglietto virtuale e questo avviene attraverso un \textsl{software} installato nelle strutture che prende il nome di \textbf{mru}.
+\paragraph{La struttura}, così come l’utente, deve avere informazione di questo biglietto virtuale e questo avviene attraverso un \textsl{software} installato in loco che prende il nome di \textbf{mru}.
 \paragraph{L'MRU} è un software che disponde di un'interfaccia web per gli operatori e per i totem che vengono utilizzati. Tutte le notti l'MRU interroga Zerocoda richiedendo le prenotazioni per la giornata odierna. Se ci sono le scarica, in questo modo anche gli operatori hanno informazione delle prenotazioni.
 
 \subsection{Use Case Diagram}
@@ -83,12 +83,12 @@ Lo scopo di quest'applicazione è quello di \textit{velocizzare l'accesso i serv
     \caption{Zerocoda Use Case Diagram}
     \label{fig:zerocodausecase}
 \end{figure}
-I diversi colori utilizzati rappresentano la \textit{divisione in servizi} scelta per la fase di implementazione delle REST Api.
+In figura [\ref{fig:zerocodausecase}] è presentato il diagramma dei casi d'uso di un utente generico di Zerocoda. I diversi colori utilizzati per le operazioni che può fare rappresentano la \textit{divisione in servizi} scelta per la fase di implementazione delle REST Api.
 
 \subsection{I diversi Enti Zerocoda}
-Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi enti. Alcuni di questi, tuttavia, non sono presenti sul sito. Ci sono strutture sanitarie che non vogliono che i loro utenti accedano a un sito generalista come \textsf{Zerocoda.it}. Questi vogliono che il loro sito funga da ``vetrina'', che l'utente riconosca la struttura presso cui prenota attraverso elementi come il logo, il nome, ecc\dots L'utilizzo del \textbf{virtual hosting} risponde a questa esigenza. In fase di accesso il servizio compare come se fosse erogato dell’ente privato. Questi \textit{siti premium} consistono in realtà in un sito statico (come lo stesso Zerocoda), ma con una configurazione dedicata, che una volta ricevuta dal browser cambia il \textsf{look and feel}.
+Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi enti. Alcuni di questi, tuttavia, non sono presenti sul sito. Ci sono strutture sanitarie che non vogliono che i loro utenti accedano a un sito generalista come \emph{Zerocoda.it}. Questi vogliono che il loro sito funga da ``vetrina'', che l'utente riconosca la struttura presso cui prenota attraverso elementi come il logo, il nome, ecc\dots L'utilizzo del \textbf{virtual hosting} risponde a questa esigenza. In fase di accesso il servizio compare come se fosse erogato dell’ente privato. Questi \textit{siti premium} consistono in realtà in un sito statico (come lo stesso Zerocoda), ma con una configurazione dedicata, che una volta ricevuta dal browser cambia il \emph{look and feel}.
 
-\paragraph{É possibile offrire una  personalizzazione maggiore} ai siti che la richiedono. La richiesta può essere quella dell'utilizzo di colori particolari per gli elementi della pagina: quali pulsanti, form, colori del background, oppure quella di immagini e loghi personalizzati.
+\paragraph{É possibile offrire una  personalizzazione maggiore} ai siti che la richiedono. La richiesta può spaziare dall'utilizzo di colori particolari per gli elementi della pagina: quali pulsanti, form, colori del background, a quella di immagini e loghi personalizzati o alla necessità di avere funzionalità esclusive rispetto ad altre strutture.
 
 \paragraph{La configurazione} consiste in un file JSON contenente tutte le informazioni del sito. Oltre alle informazioni relative al nome, indirizzo, descrizione, questo contiene anche stringhe di testo già formattate in HTML, da inserire all'interno della pagina in appositi spazi. Può contenere anche informazioni riguardanti lo stile (CSS) della pagina. La configurazione viene caricata per ultima, dopo che i componenti statici sono stati renderizzati. Viene inviata al frontend attraverso uno script JavaScript.
 
@@ -104,7 +104,7 @@ Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi e
 
 
 \subsection{Multitenancy}
-La particolarità del sistema è quella di essere \textbf{multitenant}. Con un solo servizio è possibile offfrire esperienze isolate agli utenti: una diversa esperienza sulla base della loro organizzazione. In questo modo, se un nuovo ente richiedesse che tutti i suoi dati fossero salvati su un nuovo database, si potrebbe installare un nuovo ambiente separato apposito. In alcuni casi è possibile anche chiedere metodi di registrazione o accesso al sistema ad-hoc, evitando il sistema standard basato su email e password. Così facendo, il sistema si limiterebbe ad esporre un'API in aggiunta all'applicazione condivisa da tutti, che gestisce la richiesta di autenticazione personalizzata sulle necessità dell'ente richiedente.
+La particolarità del sistema è quella di essere \textbf{multitenant} [\ref{fig:multitenancy}]. Con un solo servizio è possibile offrire esperienze isolate agli utenti: una diversa esperienza sulla base della loro organizzazione. In questo modo, se un nuovo ente richiedesse che tutti i suoi dati fossero salvati su un nuovo database, si potrebbe installare un nuovo ambiente separato apposito. In alcuni casi è possibile anche chiedere metodi di registrazione o accesso al sistema ad-hoc, evitando il sistema standard basato su email e password. Così facendo, il sistema si limiterebbe ad esporre un'API in aggiunta all'applicazione condivisa da tutti, che gestisce la richiesta di autenticazione personalizzata sulle necessità dell'ente richiedente.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.94\textwidth]{images/02_3_multitenancy.pdf}
@@ -127,15 +127,17 @@ Le chiamate dal frontend alle API intercettano il click sul documento, andando a
     password=Prova123!
 \end{alltt}
 \caption{Esempio di richiesta GET in HTTP}
+\label{fig:getlogin}
 \end{figure}
-Prendendo in analisi la seguente richiesta di login, nell'url sono presenti i parametri \textsl{email} e \textsl{password} utilizzati per autenticare l'utente. Questi dati sensibili \textit{non dovrebbero appartenere all'url} dove sono visibili, ma andrebbero passati nel \textsc{body} di una richiesta. Con la variabile \texttt{\$\_GET} in PHP è dunque possibile accedere anche a questi parametri.
+Prendendo in analisi la richiesta di login in figura [\ref{fig:getlogin}], nell'url sono presenti i parametri \textsl{email} e \textsl{password} utilizzati per autenticare l'utente. Questi dati sensibili \textit{non dovrebbero appartenere all'url} dove sono visibili, ma andrebbero passati nel \emph{body} di una richiesta. Con la variabile \texttt{\$\_GET} in PHP è dunque possibile accedere anche a questi parametri.
 
 \subsubsection{Scenario}
-Il sistema, per capire quale API è stata chiamata, ricerca il metodo della richiesta passando il parametro \texttt{\$\_GET} all'interno di un costrutto condizionale di grandi dimensioni e verificando ogni chiamata possibile. Quando il valore del parametro corrisponde al nome del metodo chiamato, nello stesso ciclo richiama l'operazione richiesta. Risulta facile notare che il codice, implementato in questo modo, presenta diversi lati negativi. Vengono ripetute parti di codice, i parametri vengono istanziati dentro ciascun \textsc{if statement} e passati ai metodi che ne richiedono l'utilizzo: tutto questo all'interno della stessa condizione. Infine, i risultati di ciascuna chiamata vengono istanziati all'interno di array.
+Il sistema, per capire quale API è stata chiamata, ricerca il metodo della richiesta passando il parametro \texttt{\$\_GET} all'interno di un costrutto condizionale di grandi dimensioni e verificando ogni chiamata possibile. In figura [\ref{fig:apicall}] viene presentata una ricostruzione di parte del codice a cui si fa riferimento. Quando il valore del parametro corrisponde al nome del metodo chiamato, nello stesso ciclo richiama l'operazione richiesta. Risulta facile notare che il codice, implementato in questo modo, presenta diversi lati negativi. Vengono ripetute parti di codice, i parametri vengono istanziati dentro ciascun \emph{if statement} e passati ai metodi che ne richiedono l'utilizzo: tutto questo all'interno della stessa condizione. Infine, i risultati di ciascuna chiamata vengono istanziati all'interno di array.
 \usemintedstyle{pastie}
 \begin{figure}
     \inputminted[firstline=2, lastline=15]{octave}{src/examples/old_api_call.php}
     \caption{Struttura delle chiamate Api}
+    \label{fig:apicall}
 \end{figure}
 
 \subsection{Same Origin Policy}
