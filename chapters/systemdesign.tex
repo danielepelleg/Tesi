@@ -13,7 +13,7 @@ Lo scopo di quest'applicazione è quello di \textit{velocizzare l'accesso i serv
 \subsection{Use Case Diagram}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.94\textwidth]{images/02_2_zerocoda_usecase.pdf}
+    \includegraphics[width=0.94\textwidth]{images/02_1_zerocoda_usecase.pdf}
     \caption{Zerocoda Use Case Diagram}
     \label{fig:zerocodausecase}
 \end{figure}
@@ -41,7 +41,7 @@ Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi e
 La particolarità del sistema è quella di essere \textbf{multitenant} [\ref{fig:multitenancy}]. Con un solo servizio è possibile offrire esperienze isolate agli utenti: una diversa esperienza sulla base della loro organizzazione. In questo modo, se un nuovo ente richiedesse che tutti i suoi dati fossero salvati su un nuovo database, si potrebbe installare un nuovo ambiente separato apposito. In alcuni casi è possibile anche chiedere metodi di registrazione o accesso al sistema ad-hoc, evitando il sistema standard basato su email e password. Così facendo, il sistema si limiterebbe ad esporre un'API in aggiunta all'applicazione condivisa da tutti, che gestisce la richiesta di autenticazione personalizzata sulle necessità dell'ente richiedente.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.94\textwidth]{images/02_3_multitenancy.pdf}
+    \includegraphics[width=0.94\textwidth]{images/02_2_multitenancy.pdf}
     \caption{Single Tenant vs. Multi Tenant}
     \label{fig:multitenancy}
 \end{figure}
@@ -107,7 +107,7 @@ Nella figura [\ref{fig:jsonpexample}] viene presentata la callback utilizzata pe
 Nell'immagine [\ref{fig:oldarchitecture}] viene rappresenta l'architettura \emph{attuale} del sistema. Di seguito vengono analizzate le tecnologie che utilizza.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{images/02_4_old_architecture.pdf}
+    \includegraphics[width=0.95\textwidth]{images/02_3_old_architecture.pdf}
     \caption{Architettura del Sistema di Partenza}
     \label{fig:oldarchitecture}
 \end{figure}
@@ -128,7 +128,7 @@ Non tutti i siti hanno abbastanza traffico da giustificare il costo di un web se
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{images/02_5_virtual_hosting.pdf}
+    \includegraphics[width=0.95\textwidth]{images/02_4_virtual_hosting.pdf}
     \caption{Funzionamento del Virtual Hosting}
     \label{fig:virtualhosting}
 \end{figure}
@@ -209,7 +209,7 @@ Nella pratica vengono utilizzate diverse versioni del modello a cascata. Attualm
 \end{enumerate}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.94\textwidth]{images/02_1_waterfall_model.pdf}
+    \includegraphics[width=0.94\textwidth]{images/02_5_waterfall_model.pdf}
     \caption{Fasi del Modello a Cascata}
     \label{fig:waterfallmodel}
 \end{figure}
@@ -219,7 +219,7 @@ Il modello da noi utilizzato rappresenta un'\textit{estensione del modello a cas
 \section{Nuova Architettura}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.84\textwidth]{images/02_11_new_architecture.pdf}
+    \includegraphics[width=0.86\textwidth]{images/02_6_new_architecture.pdf}
     \caption{Architettura del Sistema di Arrivo}
     \label{fig:newarchitecture}
 \end{figure}
@@ -230,5 +230,23 @@ Come si vede in figura [\ref{fig:newarchitecture}] parte della nuova architettur
 
 \subsection{Scenario}
 Quando l'utente si connette al sito \emph{www.prenota.zerocoda.it} viene fatta la risoluzione del DNS e il reindirizzamento sul \textit{vecchio server}. Questo rimane identico al precedente e comprende sempre frontend, backend e database. Durante il caricamento della pagina all'utente vengono sempre restituiti i componenti statici e il JavaScript, aggiornato per utilizzare le nuove API. Quando si deve fare un'operazione si utilizza ora un nuovo indirizzo \emph{api.prenota.zerocoda.it}. L'indirizzo consente le invocazioni di metodi REST, appoggiandosi a un server Apache con un indirizzo IP diverso dal precedente. Quest'ultimo funziona da Reverse Proxy, limitandosi a inoltrare le richieste ad una serie di microservizi. Ciascun microservizio interroga la stessa base di dati, che rimane invariata. Prima anche un ente che avesse richiesto una configurazione con un portale Zerocoda sul proprio sito sarebbe dovuto passare per il Web Server principale. Con l'introduzione delle nuove API sarà possibile utilizzare l'indirizzo fornito, che consente di passare direttamente per il Reverse Proxy.
+
+\subsection{Microservizi}
+La vera innovazione nell'architettura del sistema è data dall'introduzione dei Microservizi. Si è pensato alle operazioni che è possibile svolgere come a 3 macrocategorie di servizi:
+\begin{itemize}
+    \item \textbf{booking service}: il servizio riguardante le operazioni di prenotazione svolte dall'utente. In  particolare questo servizio comprende le operazioni di ricerca delle diverse strutture e dei relativi calendari di disponibilità. Pertanto si è pensato a un ulteriore suddivisione: \emph{Calendar Service} e \emph{Facility Service}.
+    \item \textbf{user service}: servizio per l'autenticazione dell'utente e per tutte quelle operazioni relative alla modifica del suo profilo, tra cui la gestione del cambio password.
+    \item \textbf{communication service}: il servizio che permette all'utente di essere notificato riguardo allo stato delle sue prenotazioni. 
+\end{itemize}
+L'implementazione riguarderà principalmente la parte relativa al booking service. La parte di comunicazione, insieme a quella di autenticazione, saranno oggetto dello sviluppo in una fase più avanzata del refactoring.
+
+\subsubsection{Gateway}
+Il Gateway in questa architettura permette di intermediare i microservizi e di esporli in maniera strutturata verso l'esterno. Il suo compito principale sarà quello di \emph{verifica delle API keys.} Mediante l'utilizzo di queste chiavi il sistema riconosce quali sono i dati da mostrare all'utente, pertanto è importante che questi dati arrivino al server esatti, passando da un primo nodo che ne effettua la verifica. In questo modo il server non viene inutilmente chiamato per la risoluzione di richieste che senza un'apy key valida non è in grado di soddisfare. Il Gateway interessa solo i microservizi di prenotazione e comunicazione, mentre non riguarda quello di autenticazione, che si limita a gestire la sessione dell'utente.
+
+\subsection{Authentication Server}
+Il server di autenticazione ha il compito di rilasciare all'utente il proprio token, che lo identifica univocamente. Questo gli permette di svolgere le operazioni per cui è richiesta un'autenticazione, come quelle di prenotazione di un servizio e la sua relativa cancellazione. 
+
+\subsubsection{JSON Web Token}
+Lo standard utilizzato per l'autenticazione dal server è il \emph{JSON Web Token (JWT)}. Si tratta di una tecnologia recente, che consiste nella preparazione di un token con un \textit{payload} che racchiude al suo interno tutte le informazioni relative alla sessione dell'utente. Oltre al payload, nel token viene inserita la firma del server, formata dall'informazione del payload criptata con codifica hash 256, che in questo modo ne autentica le informazioni. A questo punto il token è pronto per l'utilizzo e viene consegnato all'utente, che lo utilizzerà per tutte le successive chiamate. Il client è libero di leggerne il contenuto, ma non può modificarlo perchè in questo modo ne comprometterebbe la firma, rendendolo irriconoscibile per il server. Il server infatti, una volta ricevuto il token, si assicurà che questo sia stato firmato e autenticato con la sua chiave privata, e solo in seguito ne estrapola il payload. Il vero vantaggio nell'utilizzo di questa tecnologia sta nel consistente guadagno in termini di scalabilità per l'applicazione. Poichè il token contieen il payload con tutte le informazioni necessarie all'autenticazione, il server può evitare di passare ogni volta dal datbase per verificare a quale utente questo appartenga.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
