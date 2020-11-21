@@ -51,9 +51,14 @@
 * Architettura Ideale
 
 ### 3. Implementazione
+* Design Pattern
+    * Inversion od Control
+    * Façade Pattern
 * Documentazione
     * Swagger UI
+    * Nuove API REST
 * Spring Framework
+    * Dependency Injection
     * Annotazioni
 * MyBatis
     * Mapping e Configurazione
