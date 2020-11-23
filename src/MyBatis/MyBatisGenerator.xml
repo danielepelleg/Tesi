@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+        <jdbcConnection 
+            driverClass="com.mysql.jdbc.Driver" 
+            connectionURL="jdbc:mysql://localhost:3306/database_name"                
+            userId="database_id" 
+            password="password">
+        </jdbcConnection>
+
+        <!-- Path to Mapper XML files -->
+        <sqlMapGenerator 
+            targetPackage="it.mapsgroup.zerocoda.booking.persistence.mapper"
+            targetProject="./booking-persistence/src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- Path to Mapper Interfaces -->
+        <javaClientGenerator 
+            type="XMLMAPPER" 
+            targetPackage="it.mapsgroup.zerocoda.booking.persistence.mapper"                  
+            targetProject="./booking-persistence/src/main/java">
+        </javaClientGenerator>
+
+        <!-- Services Table -->
+        <table tableName="services">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" 
+            identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

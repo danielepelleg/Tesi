@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".../.mapper.ServicesExMapper">
+    <resultMap id="BaseResultMap" type=".../.dto.ServicesEx"
+      extends=".../.mapper.ServicesMapper.BaseResultMap">
+      <association property="enterprises" columnPrefix="E_"
+        resultMap=".../.mapper.EnterprisesMapper.BaseResultMap"/>
+    </resultMap>
+
+    <select id="selectByFilter" resultMap="BaseResultMap"
+      parameterType=".../.dto.ConfigServicesRemoteFilter">
+
+        select
+        S.id as id,
+        S.name as name,
+        S.enterprises_id as enterprises,
+        E.name as E_name
+
+
+        from enterprises E
+        INNER JOIN services S ON E.id = S.enterprise_id
+        <where>
+            <if test="andServiceIdEqualsTo != null">
+                and CSR.id = #{andConfigServicesRemoteIdEqualsTo}
+            </if>
+        </where>
+    </select>
+</mapper>

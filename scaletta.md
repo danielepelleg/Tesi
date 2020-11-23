@@ -61,7 +61,8 @@
     * Dependency Injection
     * Annotazioni
 * MyBatis
-    * Mapping e Configurazione
+    * Configurazione
+    * Creazione di una Query
 * Struttura del Progetto
     * DTO
     * DAO
