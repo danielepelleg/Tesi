@@ -9,7 +9,7 @@ L'\emph{Inversion of Control (IoC)} è il design pattern su cui si basano la mag
 \subsubsection{Façade Pattern}
 Questo design pattern contribuisce alla semplificazione delle interazioni con il framework o un set complesso di classi. Quando il codice lavora con un vasto set di oggetti appartenenti a librerie o framework sofisticati, normalmente è necessario inizializzare tali oggetti, tenere traccia delle loro dipendenze e chiamare i relativi metodi nel giusto ordine. In questo modo però il nostro sistema risulta strettamente legato all’implementazione di tali framework rendendolo difficile da mantenere. Il pattern risponde a questo problema. Una Facade è una classe che gestisce al posto nostro la logica appena descritta.
 
-\paragraph{}Si utilizza lo schema del sito \emph{Refactoring Guru} \cite{refactoring:facadepattern} per semplificare i concetti alla base del suo funzionamento. Prendendo come riferimento la figura [\ref{fig:facadepattern}] presentiamo gli elementi che compongono il pattern strutturale:
+\paragraph{}Si utilizza lo schema del sito \emph{Refactoring Guru} \cite{refactoring:facadepattern} per semplificare i concetti alla base del suo funzionamento. Prendendo come riferimento la Figura \ref{fig:facadepattern} presentiamo gli elementi che compongono il pattern strutturale:
 
 \begin{figure}[H]
     \centering
@@ -29,8 +29,6 @@ Questo design pattern contribuisce alla semplificazione delle interazioni con il
 \section{Documentazione}
 La documentazione è stato il vero primo passo nel percorso di implementazione. Una decisione inusuale per lo sviluppo di un software, ma comprensibile per un caso di refactoring come questo, privo di una documentazione iniziale. 
 
-%Sono state individuate un totale di 9 API da riscrivere, tutte originariamente sviluppate come metodi \emph{GET}. Di queste, 3 appartengono all'authentication server, mentre le restanti al booking server. Parte di queste API oltre alle operazioni sul database comprendono un sistema di notifica utente. Per queste API si è deciso di separare le due operazioni, delegando il sistema di notifica al \emph{Communication Server}.
-
 \subsection{Swagger}
 Swagger è un \emph{tool} composto da un set di software open source per progettare, creare e documentare \emph{RESTful APIs} attraverso l’\emph{OpenAPI Specification}, un formato di descrizione apposito per le REST APIs. In particolare aiuta a descrivere:
 \begin{enumerate}
@@ -48,7 +46,7 @@ Per descrivere il funzionamento del software si è utilizzato \emph{Swagger UI},
     \label{fig:swaggerexample}
 \end{figure}
 
-In figura [\ref{fig:swaggerexample}] viene presentato un esempio di specifica OpenAPI realizzata con swagger. Il documento descrive l'API di prenotazione di un servizio. In riferimento alla numerazione in figura, elenchiamo i campi che compongono la descrizione della nuova API.
+In Figura \ref{fig:swaggerexample} viene presentato un esempio di specifica OpenAPI realizzata con swagger. Il documento descrive l'API di prenotazione di un servizio. In riferimento alla numerazione in figura, elenchiamo i campi che compongono la descrizione della nuova API.
 \begin{enumerate}
     \item Metodo HTTP eseguito sull'url \emph{/v1/bookings} dove  \emph{`v1'} indica la versione delle attuali API. In questo campo e nel successivo è presente una breve descrizione dell'operazione.
     \item Il lucchetto in alto a destra, quando presente, indica che per quella chiamata è richiesta un'autorizzazione. In questo caso l'utente per poter prenotare un servizio deve aver effettuato l'accesso al sistema.
@@ -58,7 +56,7 @@ In figura [\ref{fig:swaggerexample}] viene presentato un esempio di specifica Op
 \end{enumerate}
 
 \subsection{Nuove API}
-Sono state individuate un totale di 6 API associabili al \emph{booking server}, tutte originariamente sviluppate come metodi \emph{GET}. Parte di queste API oltre alle operazioni sul database comprende un sistema di notifica utente. Per queste API si è deciso di separare le due operazioni, delegando il sistema di notifica al \emph{Communication Server}.
+Sono state individuate un totale di 6 API associabili al \emph{booking server}, tutte originariamente sviluppate come metodi \emph{GET}. Parte di queste API, oltre alle operazioni sul database, comprendono un sistema di notifica utente. Per queste API si è deciso di separare le due operazioni, delegando il sistema di notifica al \emph{Communication Server}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{images/03_3_new_rest_api.pdf}
@@ -66,7 +64,7 @@ Sono state individuate un totale di 6 API associabili al \emph{booking server}, 
     \label{fig:newrestapi}
 \end{figure}
 
-In riferimento alla figura [\ref{fig:newrestapi}], vengono ora elencate le operazioni svolte dalle nuove API REST in ordine di servizio: \emph{booking service}, \emph{calendar service}, \emph{facility service}.
+In riferimento alla Figura \ref{fig:newrestapi}, vengono ora elencate le operazioni svolte dalle nuove API REST in ordine di servizio: \emph{booking service}, \emph{calendar service}, \emph{facility service}.
 \begin{itemize}
     \item \texttt{GET v1/bookings} recupera le prenotazioni di un utente. Questa operazione richiede un utente autenticato al sistema. Viene chiamata quando l'utente effettua il login o il numero delle sue prenotazioni cambia, come ad esempio dopo una prenotazione andata a buon fine o dopo una sua cancellazione.
     \item \texttt{POST v1/bookings} registra una nuova prenotazione nel database. Questa richiesta è inviata al booking server nel momento in cui l'utente prenota un servizio. Si tratta di una richiesta fatta con il metodo POST, pertanto è previsto l'invio di un oggetto nel \emph{body della richiesta}. Nell'\emph{oggetto Reservation} mandato nella richiesta viene specificato lo \emph{slot} che l'utente vuole prenotare.
@@ -104,7 +102,7 @@ MyBatis è un framework di persistenza che effettua il mapping (ovvero definisce
     \label{fig:mybatisconfiguration}
 \end{figure}
 
-In figura [\ref{fig:mybatisconfiguration}] viene mostrato il file di configurazione di MyBatis. Nel file individuiamo diversi tag:
+In Figura \ref{fig:mybatisconfiguration} viene mostrato il file XML contenente la configurazione di MyBatis. Nel file individuiamo diversi tag:
 \begin{itemize}
     \item <jdbcConnection> comprende le informazioni di connessione al database. Nel codice mostrato le informazioni sensibili sono state anonimizzate.
     \item \texttt{<table>} specifica una tabella di cui mi MyBatis andrà a effettuare il mapping.
@@ -112,7 +110,7 @@ In figura [\ref{fig:mybatisconfiguration}] viene mostrato il file di configurazi
     \item \texttt{<javaClientGenerator>} specifica il percorso in cui vengono salvate le interfacce corrispondenti ai file XML.
 \end{itemize}
 
-Una volta creato il file di configurazione questo viene passato come input al tool di MyBatis, che procederà a effettuarne il mapping appena configurato.
+Una volta creato il file di configurazione questo viene passato come input al tool di MyBatis, che procede a effettuarne il mapping appena configurato.
 
 \subsection{Creazione di una Query}
 \usemintedstyle{autumn}
@@ -121,7 +119,7 @@ Una volta creato il file di configurazione questo viene passato come input al to
     \caption{Query con MyBatis}
     \label{fig:mybatisquery}
 \end{figure}
-In figura [\ref{fig:mybatisquery}] viene rappresentata la sruttura del file \emph{ConfigServicesRemoteExMapper.xml}, che eredita dalla classe padre \emph{ConfigServicesRemoteMapper.xml}. Per i file XML contenti le query delle API si è scelto di utilizzare il suffisso `ex', in modo da non modificare i file generati da MyBatis, ma limitandosi ad \emph{estendere le loro funzionalità}. La query in figura rappresenta una semplice \emph{JOIN} tra \emph{struttura} e \emph{servizio erogato}. Nel file vengono specificate eventuali associazioni presenti nella query tra la tabella padre e altre tabelle (in questo caso \textit{ConfigMryouEnterprise}, dove sono salvate le strutture). Nel tag \texttt{<select>} vengono specificati \emph{l'attributo id}, che mappa la query, e l'attributo \emph{parameterType}. Quest'ultimo attributo serve per specificare la classe che istanzia l'oggetto che gestisce i parametri inseriti nelle clausole \textit{Group By, Order By, Where}.
+In Figura \ref{fig:mybatisquery} viene rappresentata la sruttura del file \emph{ConfigServicesRemoteExMapper.xml}, che eredita dalla classe padre \emph{ConfigServicesRemoteMapper.xml}. Per i file XML contenti le query delle API si è scelto di utilizzare il suffisso `ex', in modo da non modificare i file generati da MyBatis, ma limitandosi ad \emph{estendere le loro funzionalità}. La query in figura rappresenta una semplice \emph{JOIN} tra \emph{struttura} e \emph{servizio erogato}. Nel file vengono specificate eventuali associazioni presenti nella query tra la tabella padre e altre tabelle (in questo caso \textit{ConfigMryouEnterprise}, dove sono salvate le strutture). Nel tag \texttt{<select>} vengono specificati \emph{l'attributo id}, che mappa la query, e l'attributo \emph{parameterType}. Quest'ultimo attributo serve per specificare la classe che istanzia l'oggetto che gestisce i parametri inseriti nelle clausole \textit{Group By, Order By, Where}.
 
 
 \begin{figure}[H]
@@ -136,7 +134,7 @@ In figura [\ref{fig:mybatisquery}] viene rappresentata la sruttura del file \emp
     \caption{Interfaccia ConfigServicesRemoteExMapper}
     \label{fig:mybatismapperinterface}
 \end{figure}
-Una volta creato il file XML, è necessario creare il mapper Java. Il Mapper, come si osserva in figura [\ref{fig:mybatismapperinterface}], è un'interfaccia contenente i metodi corrispondenti agli ID delle query create. Il metodo in questo caso restituisce un unico oggetto \textit{ConfigServicesRemote}. E' possibile fare restituire alle query anche una lista o oggetti come date, stringhe o interi. Il tipo di oggetto risultante deve sempre essere specificato nel mapper XML. In questo caso, per interrogare il sistema, il database ha bisogno di un oggetto ConfigServicesRemoteFilter, creato ad-hoc per semplificare la costruzione della query. La classe di quest'oggetto è costituita da attributi con metodi setter per specificarne il valore. In questo modo, cercando un servizio con uno specifico ID, sarà sufficiente scrivere quanto segue in figura [\ref{fig:filterobject}]:
+Una volta creato il file XML, è necessario creare il mapper Java. Il Mapper, come si osserva in Figura \ref{fig:mybatismapperinterface}, è un'interfaccia contenente i metodi corrispondenti agli ID delle query create. Il metodo in questo caso restituisce un unico oggetto \textit{ConfigServicesRemote}. E' possibile fare restituire alle query anche una lista o oggetti come date, stringhe o interi. Il tipo di oggetto risultante deve sempre essere specificato nel mapper XML. In questo caso, per interrogare il sistema, il database ha bisogno di un oggetto ConfigServicesRemoteFilter, creato ad-hoc per semplificare la costruzione della query. La classe di quest'oggetto è costituita da attributi con metodi setter per specificarne il valore. In questo modo, cercando un servizio con uno specifico ID, sarà sufficiente scrivere quanto segue in Figura \ref{fig:filterobject}:
 
 \begin{figure}
     \begin{minted}{JAVA}
@@ -156,14 +154,14 @@ In questa sezione viene presentato il packaging del progetto. Si presentano i mo
 \begin{itemize}
     \item \textbf{booking-dto}: contiene le classi utilizzate per instanziare gli oggetti utilizzati nei body delle richieste POST del client, o per istanziare gli oggetti restituiti dal server.
     \item \textbf{booking-persistance}: comprende le classi di persistenza, ovvero tutte quelle classi di Mapping e configurazione delle tabelle del database, nonchè i file XML necessari al corretto funzionamento di MyBatis.
-    \item \textbf{booking-server}: contiene le vere e proprie API REST. In questo modulo sono contenute le classi Controller delle API, con i relativi servizi dove vengono implementate le chiamate. In riferimento alla figura [\ref{fig:newrestapi}] individuiamo 3 controller, ai quali corrispondono i 3 servizi: \emph{booking}, \emph{calendar} e \emph{facility}.
+    \item \textbf{booking-server}: contiene le vere e proprie API REST. In questo modulo sono contenute le classi Controller delle API, con i relativi servizi dove vengono implementate le chiamate. In riferimento alla Figura \ref{fig:newrestapi} individuiamo 3 controller, ai quali corrispondono i 3 servizi: \emph{booking}, \emph{calendar} e \emph{facility}.
 \end{itemize}
 
 \subsection{Data Transfer Object - DTO}
 Il \emph{Data Transfer Object} è un design pattern utilizzato per trasferire dati tra sottosistemi di un'applicazione software. Nel processo di implementazione, il DTO è stato utilizzato per mappare gli oggetti restituiti dalle query del DAO, in oggetti con cui l'utente può interagire. In questo modo il risultato di una query che sul database interessa diverse tabelle viene presentata all'utente come un singolo oggetto che può comprendere.
 
 \subsubsection{Class Diagram}
-In figura [\ref{fig:classdiagram}] viene presentato il diagramma delle classi utilizzate per il mapping dei risultati ottenuti dalle query. Nelle sezioni successive si farà riferimento a questi oggetti. I diversi colori utilizzati rappresentano la suddivisione in servizi. Le classi che non sono state colorate istanziano oggetti che non sono direttamente utilizzati nelle richieste o restituiti nelle risposte dalle chiamate REST.
+In Figura \ref{fig:classdiagram} viene presentato il diagramma delle classi utilizzate per il mapping dei risultati ottenuti dalle query. Nelle sezioni successive si farà riferimento a questi oggetti. I diversi colori utilizzati rappresentano la suddivisione in servizi. Le classi che non sono state colorate istanziano oggetti che non sono direttamente utilizzati nelle richieste o restituiti nelle risposte dalle chiamate REST.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.88\textwidth]{images/03_4_class_diagram.pdf}
@@ -199,13 +197,13 @@ public List<ConfigMryouEnterpriseEx> findActive
 \label{fig:daoclass}
 \end{figure}
 
-La classe ConfigMryouEnterpriseDao in figura [\ref{fig:daoclass}] viene utilizzata per interfacciarsi con il file di mapping XML creato seguendo la procedura precedentemente esposta. La query chiamata restituisce la lista delle strutture sanitarie, sulla base dell'ID API fornito. L'ID API è un \emph{parametro della query}, che può essere assegnato mediante il relativo metodo setter della classe \emph{ConfigMryouEnterpriseFilter}. La classe utilizza le annotazioni Spring per comunicare con gli altri componenti dell'applicazione.
+La classe ConfigMryouEnterpriseDao in Figura \ref{fig:daoclass} viene utilizzata per interfacciarsi con il file di mapping XML creato seguendo la procedura precedentemente esposta. La query chiamata restituisce la lista delle strutture sanitarie, sulla base dell'ID API fornito. L'ID API è un \emph{parametro della query}, che può essere assegnato mediante il relativo metodo setter della classe \emph{ConfigMryouEnterpriseFilter}. La classe utilizza le annotazioni Spring per comunicare con gli altri componenti dell'applicazione.
 
 \subsection{Booking Server}
-All'interno di questo modulo sono presenti le \emph{classi controller} e le relative \emph{classi service}. Le prime contribuiscono a creare la documentazione Swagger, e quindi le specifiche Open Api in figura [\ref{fig:swaggerexample}], mentre le seconde implementano la chiamata REST.
+All'interno di questo modulo sono presenti le \emph{classi controller} e le relative \emph{classi service}. Le prime contribuiscono a creare la documentazione Swagger, e quindi le specifiche Open Api (Figura \ref{fig:swaggerexample}), mentre le seconde implementano la chiamata REST.
 
 \subsubsection{Classi Controller}
-La classe \emph{FacilityController} in figura [\ref{fig:facilitycontroller}] presenta la chiamata \texttt{GET v1/facilities}: il metodo HTTP che restituisce la lista delle strutture sanitarie. La chiamata è implementata richiamando il metodo dell'omonima \emph{classe service} all'interno della funzione exec.
+La classe \emph{FacilityController} (Figura \ref{fig:facilitycontroller}) presenta la chiamata \texttt{GET v1/facilities}: il metodo HTTP che restituisce la lista delle strutture sanitarie. La chiamata è implementata richiamando il metodo dell'omonima \emph{classe service} all'interno della funzione exec.
 \begin{figure}
 \begin{minted}{Java}
     @RestController
@@ -294,7 +292,7 @@ public class FacilityService {
 \label{fig:facilityservice}
 \end{figure}
 
-In figura [\ref{fig:facilityservice}] viene mostrata l'implementazione della chiamata \texttt{GET v1/facilities}. Com'è logico pensare la classe utilizza le annotazioni Spring per legarsi alla classe ConfigMryouEnterpriseDao (illustrata precedentemente) e al DtoMapper, una classe creata appositamente per convertire gli oggetti mappati sui file XML di MyBatis in oggetti definiti nel DTO in figura [\ref{fig:classdiagram}]. Nella classe viene prima creato il filtro come visto in figura [\ref{fig:filterobject}] e successivamente chiamata la query definita nel classe DAO [\ref{fig:daoclass}]. Se il risultato della query ha una struttura particolarmente difficile per essere convertito dal DTO, può essere passato al DaoHelper come in questo caso. Il DaoHelper è una classe che ha il compito di separare gli oggetti risultanti dalle query con una o più condizioni di join. Così facendo è possibile fornire al DtoMapper anche due oggetti distinti, facilitandone la conversione. Il nuovo oggetto restituito dal DtoMapper viene in seguito incapsulato in una \emph{lista Result}, che contiene due elementi: la lista contenente gli oggetti restituiti dal mapper (in questo caso sono oggetti Facility) e il numero totale degli elementi della lista.
+In Figura \ref{fig:facilityservice} viene mostrata l'implementazione della chiamata \texttt{GET v1/facilities}. Com'è logico pensare la classe utilizza le annotazioni Spring per legarsi alla classe ConfigMryouEnterpriseDao (illustrata precedentemente) e al DtoMapper, una classe creata appositamente per convertire gli oggetti mappati sui file XML di MyBatis in oggetti definiti nel DTO (Figura \ref{fig:classdiagram}). Nella classe viene prima creato il filtro come visto (Figura \ref{fig:filterobject}) e successivamente chiamata la query definita nel classe DAO (Figura \ref{fig:daoclass}). Se il risultato della query ha una struttura particolarmente difficile per essere convertito dal DTO, può essere passato al DaoHelper come in questo caso. Il DaoHelper è una classe che ha il compito di separare gli oggetti risultanti dalle query con una o più condizioni di join. Così facendo è possibile fornire al DtoMapper anche due oggetti distinti, facilitandone la conversione. Il nuovo oggetto restituito dal DtoMapper viene in seguito incapsulato in una \emph{lista Result}, che contiene due elementi: la lista contenente gli oggetti restituiti dal mapper (in questo caso sono oggetti Facility) e il numero totale degli elementi della lista.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

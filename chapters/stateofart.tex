@@ -8,7 +8,7 @@ Le vecchie metodologie come la programmazione strutturata e procedurale, in auge
 \subsection{Le origini}
 Per comprendere meglio il significato di \textsl{programmare per oggetti} è necessario comprendere cosa significhi non farlo. In questa sezione si propone con una breve analisi dei precursori dell'\textit{Object Oriented Programming}.
 
-\subsubsection{Programmazione non strutturata [\ref{fig:nonstructured-programming}]}
+\subsubsection{Programmazione non strutturata (Figura \ref{fig:nonstructured-programming})}
 In questo paradigma il programma è costituito da \textit{un unico blocco di codice detto “main”} dentro il quale vengono manipolati i dati in maniera totalmente sequenziale. Qui i dati sono rappresentati soltanto da variabili di tipo globale, ovvero visibili da ogni parte del programma ed allocate in memoria per tutto il tempo che il programma stesso rimane in esecuzione. È facile intuire come ciò sia un notevole svantaggio. Questo tipo di programmazione comporta ridondanza nel codice e un'enorme spreco di risorse del sistema. 
 \begin{figure}[H]
     \centering
@@ -17,7 +17,7 @@ In questo paradigma il programma è costituito da \textit{un unico blocco di cod
     \label{fig:nonstructured-programming}
 \end{figure}
 
-\subsubsection{Programmazione procedurale[\ref{fig:procedural-programming}]}
+\subsubsection{Programmazione procedurale (Figura \ref{fig:procedural-programming})}
 Il concetto base di questo tipo di programmazione è quello di raggruppare i pezzi di programma ripetuti in porzioni di codice utilizzabili e richiamabili ogni volta che se ne presenti l’esigenza. Le porzioni di codice con queste caratteristiche prendono il nome di \textit{procedure}. Ogni procedura può essere vista come un \textit{sottoprogramma che svolge una ben determinata funzione} e che è visibile e richiamabile dal resto del codice. La programmazione procedurale rappresenta un notevole passo in avanti rispetto a quella non strutturata, in quanto ne supera i limiti di ridondanza e garantisce una migliore gestione della memoria di sistema. Il vantaggio di una procedure sta nell'utilizzo dei parametri, allocati in memoria solo nel momento in cui una quest'ultima viene chiamata. Il \textit{main continua ad esistere} ma al suo interno presenta esclusivamente le invocazioni alle procedure definite dal programma. 
 \begin{figure}[H]
     \centering
@@ -27,7 +27,7 @@ Il concetto base di questo tipo di programmazione è quello di raggruppare i pez
 \end{figure}
 Quando una procedura ha terminato il suo compito, il controllo ritorna nuovamente al main (o alla procedura che ne ha effettuato l’invocazione) che esegue una nuova chiamata ad un’altra procedura fino alla terminazione del programma.
 
-\subsubsection{Programmazione modulare[\ref{fig:modular-programming}]}
+\subsubsection{Programmazione modulare (Figura \ref{fig:modular-programming})}
 Questo paradigma rapprenta un ulteriore passo avanti rispetto ai precedenti. La programmazione modulare risponde all'esigenza di poter \textit{riutilizzare le procedure messe a disposizione da un programma in modo che anche altri programmi ne possano trarre vantaggio}. L’idea alla base di questo paradigma è quella di raggruppare le procedure aventi un dominio comune (ad esempio, procedure che eseguono operazioni matematiche) in moduli separati. Quando si parla di \textbf{librerie di programmi}, in sostanza si fa riferimento proprio a moduli di codice indipendenti che ben si prestano ad essere riutilizzati in svariati programmi.
 \begin{figure}[H]
     \centering
@@ -45,7 +45,7 @@ Con questo paradigma un singolo programma non è più costituito da un solo file
     \caption{Colloquio tra oggetti}
     \label{fig:objectoriented-programming}
 \end{figure}
-Nella figura [\ref{fig:objectoriented-programming}] gli oggetti sono rappresentati dagli esagoni, che contengono i dati e comunicano attraverso metodi. Nella OOP, i dati (o caratteristiche dell'oggetto), prendono il nome di \textbf{proprietà}, mentre le azioni che essi possono fare \textbf{metodi}. Le proprietà vengono utilizzate dai metodi per eseguire determinate operazioni. Con l'espressione \textbf{pensare “ad oggetti”} quindi si identificano gli oggetti che entrano in gioco nel programma che si vuole sviluppare, gestendone l’interazione degli uni con gli altri.
+Nella Figura \ref{fig:objectoriented-programming} gli oggetti sono rappresentati dagli esagoni, che contengono i dati e comunicano attraverso metodi. Nella OOP, i dati (o caratteristiche dell'oggetto), prendono il nome di \textbf{proprietà}, mentre le azioni che essi possono fare \textbf{metodi}. Le proprietà vengono utilizzate dai metodi per eseguire determinate operazioni. Con l'espressione \textbf{pensare “ad oggetti”} quindi si identificano gli oggetti che entrano in gioco nel programma che si vuole sviluppare, gestendone l’interazione degli uni con gli altri.
 
 \subsection{Java | Oracle}
 \setlength{\epigraphwidth}{.6\textwidth}
@@ -59,7 +59,7 @@ La nascita del linguaggio Java alla fine del XX secolo segnò un punto di svolta
 Prendendo in analisi i grafici offerti da \emph{TIOBE Programming Community Index} \cite{jansen:tiobe} contenente in ordine i linguaggi di programmazione più utilizzati, Java sembrerebbe essere al primo posto. Si tratta di un linguaggio facilmente manutenibile e dotato di molta documentazione che ne facilita l'apprendimento. Con le diverse librerie e framework compatibili è diventato il linguaggio di programmazione a oggetti più utilizzato al mondo, primo anche al precursore C++, dove la gestione della memoria e la curva di apprendimento possono rappresentare un problema. Java è stato adottato per la realizzazione del backend di diversi siti web di rilievo, come il sito d'asta e vendita online \textit{eBay}.
 
 \subsubsection{Le motivazioni}
-Uno dei più grandi vantaggi offerti da Java è proprio la sua capacità di addattamento ad aggiornamenti e modifiche del software in corso d'opera. Per capire meglio il perchè di questa scelta, facciamo riferimento all'esempio in figura [\ref{fig:objectoriented-system}]:
+Uno dei più grandi vantaggi offerti da Java è proprio la sua capacità di addattamento ad aggiornamenti e modifiche del software in corso d'opera. Per capire meglio il perchè di questa scelta, facciamo riferimento all'esempio in Figura \ref{fig:objectoriented-system}:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{images/01_5_java_class_diagram.pdf}
@@ -73,7 +73,7 @@ Si pensi ad un rivenditore di auto che ha vari veicoli nel suo parco mezzi. Ogni
 Nello svolgimeto di ogni attività, sia a livello individuale sia in organizazioni di ogni dimmensione, sono essenziali la disponibilità di informazioni e la capacità di gestirle in modo efficiente \cite{book:basididati}. Un database relazionale è un tipo di database di archiviazione che fornisce accesso a data points tra i quali sussistono relazioni predefinite e che soddisfa queste esigenze. I database relazionali sono basati sul modello relazionale, un modello di rappresentazione dati semplice e diretto basato sull'utilizzo di tabelle.
 
 \subsection{Modello Relazionale}
-Il modello relazionale si basa su due concetti: \textbf{relazione} e \textbf{tabella}. La nozione di \textit{relazione} proviene dalla matematica, in particolare dalla teoria degli insiemi, mentre il concetto di \textit{tabella} è intuitivo. Il punto di forza del modello di database relazionale è l'uso delle tabelle, che permettono di archiviare informazioni strutturate e accedervi, risultando comprensibili anche per gli utenti finali. [\ref{fig:example-relationaldatabase}]
+Il modello relazionale si basa su due concetti: \textbf{relazione} e \textbf{tabella}. La nozione di \textit{relazione} proviene dalla matematica, in particolare dalla teoria degli insiemi, mentre il concetto di \textit{tabella} è intuitivo. Il punto di forza del modello di database relazionale è l'uso delle tabelle, che permettono di archiviare informazioni strutturate e accedervi, risultando comprensibili anche per gli utenti finali (Figura \ref{fig:example-relationaldatabase}).
 \begin{figure}
     \begin{table}[H]
         \centering
@@ -152,7 +152,7 @@ Un database non relazionale (chiamato anche \textit{NoSQL}) è preferibile quand
 Con un database NoSQL è possibile costruire un documento adatto alla mappatura delle classi-oggetto del proprio applicativo riducendo di molto i tempi di sviluppo. La \textit{mancanza dei controlli fondamentali sull'integrità dei dati}, tuttavia, delega all'applicativo che dialoga con il database questo compito, che ovviamente dovrà essere testato in maniera più approfondita prima di essere messo in produzione. Nei database relazionali questo tipo di controllo avviene all'interno dello stesso database. 
 
 \subsection{MySQL}
-Quotidianamente, immense quantità di informazioni vengono affidate a tecnologie che ne garantiscono la conservazione duratura ed un recupero efficiente che ne permetta l’analisi. Da anni, questo ruolo viene interpretato molto bene da un prodotto software completo, efficiente ed affidabile: MySQL \cite{site:mysql} . Questo software è un DBMS (database management system) open source per la gestione di database relazionali e rappresenta una delle tecnologie più note e diffuse nel mondo dell'IT. I programmi che devono interagire quindi con una base di dati non possono farlo direttamente, ma devono dialogare con il DBMS, che è l’unico ad accedere fisicamente alle informazioni.
+Quotidianamente, immense quantità di informazioni vengono affidate a tecnologie che ne garantiscono la conservazione duratura ed un recupero efficiente che ne permetta l’analisi. Da anni, questo ruolo viene interpretato molto bene da un prodotto software completo, efficiente ed affidabile: MySQL \cite{site:mysql} . Questo software è un DBMS (database management system) open source per la gestione di database relazionali e rappresenta una delle tecnologie più note e diffuse nel mondo dell'IT. I programmi che devono interagire quindi con una base di dati non possono farlo direttamente, ma devono dialogare con il DBMS (Figura \ref{fig:databasemanagementsystem}), che è l’unico ad accedere fisicamente alle informazioni.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.60\textwidth]{images/01_6_dbms.pdf}
@@ -218,10 +218,10 @@ Le applicazioni che seguono questo tipo di architettura sono di facile implement
 L'architettura di microservizi rappresenta un'approccio all'avanguardia per lo sviluppo e l'organizzazione del software. Secondo questo stile, il software è composto da servizi indipendenti di piccole dimensioni che hanno come finalità lo svolgimento di un unico compito, e di farlo nel migliore dei modi \cite{amazon:microservices}. Ciascun microservizio, indipendente dagli altri, è dunque gestito da un unico team di sviluppo. Per una definizione più precisa riprendiamo le parole di Martin Fowler \cite{fowler:microservices}, considerato uno dei massimi esperti in materia, che afferma: \textit{<<Lo stile architetturale a microservizi è un approccio allo sviluppo di una singola applicazione come insieme di piccoli servizi, ciascuno dei quali viene eseguito da un proprio processo e comunica con un meccanismo snello, spesso una HTTP API.>>} 
 
 \subsection{Le origini}
-Il primo tentativo di architettura a servizi nasce con l’\texttt{architettura SOA}. Il concetto delle \textit{Service-Oriented Architecture} si afferma all’inizio degli anni Duemila come una collezione di servizi indipendenti che comunicano gli uni con gli altri tramite un \textit{Enterprise Service Bus (ESB)}. L’architettura a microservizi è una chiara \textbf{evoluzione dell’architettura SOA}, spinta dall’esigenza  di una sempre più’ marcata scalabilità, la quale permette di reggere il carico di milioni di utenti connessi in un determinato istante.
+Il primo tentativo di architettura a servizi nasce con l’\textit{architettura SOA}. Il concetto delle \textit{Service-Oriented Architecture} si afferma all’inizio degli anni Duemila come una collezione di servizi indipendenti che comunicano gli uni con gli altri tramite un \textit{Enterprise Service Bus (ESB)}. L’architettura a microservizi è una chiara \textbf{evoluzione dell’architettura SOA}, spinta dall’esigenza  di una sempre più’ marcata scalabilità, la quale permette di reggere il carico di milioni di utenti connessi in un determinato istante.
 
 \subsection{Le differenze con SOA}
-Per studiare le differenze tra le due architettura facciamo riferimento alla figura [\ref{fig:soavsmicroservices}]:
+Per studiare le differenze tra le due architettura facciamo riferimento alla Figura \ref{fig:soavsmicroservices}:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{images/01_8_microservices_vs_soa.pdf}
@@ -246,7 +246,7 @@ Ciascun servizio è progettato per una serie di capacità e si concentra sulla r
 Durante lo sviluppo di un microservizio si ha totale libertà di scelta nell'utilizzo delle tecnologie. Ciascuna tecnologia viene decisa esclusivamente in base allo scopo del microservizio, senza basarsi sulla sua interazione con gli altri. Un microservizio può fare affidamento su un modello di database relazionale mentre un servizio con cui comunica su uno di tipo non relazionale, così come la loro logica può essere scritta in linguaggi differenti.
 
 \subsubsection{Semplicità di Distribuzione}
-Con i microservizi è possibile apportare una modifica a un singolo servizio e distribuirlo indipendentemente dal resto del sistema con tecniche di continuos delivery del tutto automizzate. Questo permette di rilasciare aggiornamenti più velocemente e in maniera più sicura.
+Con i microservizi è possibile apportare una modifica a un singolo servizio e distribuirlo indipendentemente dal resto del sistema con tecniche di continuos delivery del tutto automizzate. Gli aggiornamenti sono così rilasciati più velocemente e in modo più sicuro.
 
 \subsubsection{Resilienza}
 La resilienza è la capacità di accettare la possibilità’ di errori e continuare a funzionare. Con i microservizi, le applicazioni possono gestire completamente gli errori di un servizio isolando la funzionalità senza bloccare l’intera applicazione.
@@ -374,4 +374,4 @@ La differenza sostanziale tra le due tecnologie introdotto risiede nel fatto che
     \label{fig:restvssoap}
 \end{figure}
 
-Un servizio SOAP, indirizza le richieste sempre verso un unico indirizzo chiamato \textit{endpoint}. Tutte le richieste vengono effetuate sempre con il metodo POST e questo porta ad un maggior traffico verso l’end-point in quanto in tutte le richieste viene sempre inviato un documento XML. Nei servizi REST le richieste vengono indirizzate verso URI differenti che si mappano sulle risorse. Il consumo di banda che porta un servizio REST è ridotto al minimo, infatti viene inviato insieme alla richiesta un documento XML o altre informazioni oltre all’URI solo quando bisogna creare o aggiornare lo stato di una risorsa [\ref{fig:restvssoap}].
+Un servizio SOAP, indirizza le richieste sempre verso un unico indirizzo chiamato \textit{endpoint}. Tutte le richieste vengono effetuate sempre con il metodo POST e questo porta ad un maggior traffico verso l’end-point in quanto in tutte le richieste viene sempre inviato un documento XML. Nei servizi REST le richieste vengono indirizzate verso URI differenti che si mappano sulle risorse. Il consumo di banda che porta un servizio REST è ridotto al minimo, infatti viene inviato insieme alla richiesta un documento XML o altre informazioni oltre all’URI solo quando bisogna creare o aggiornare lo stato di una risorsa (Figura \ref{fig:restvssoap}).
