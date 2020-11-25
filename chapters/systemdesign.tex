@@ -6,19 +6,19 @@ In questo capitolo è illustrato il funzionamento del sistema prima e dopo l'azi
 Lo scopo di quest'applicazione è quello di \textit{velocizzare l'accesso ai servizi sanitari}. Senza questo \textit{primo requisito}, l'applicazione non troverebbe posto nel mondo enterprise. Per questo motivo, l'interfaccia utente risulta semplice e comprende poche funzionalità. 
 \paragraph{L'utente} per accedere ai servizi deve registrarsi al sistema fornendo i propri dati personali (che potranno essere modificati in qualsiasi momento), scegliendo un'email e una password per le future autenticazioni. Anche senza essere registrato può cercare una struttura tra quelle presenti e scegliere un servizio che questa eroga. 
 \paragraph{I servizi} possono essere diversi: analisi, esami, visite mediche, qualsiasi servizio che preveda un'attesa del cliente potrebbe essere inserito da una struttura sanitaria. Selezionando un servizio, all'utente viene mostrato il relativo calendario di disponibilità, in termini di giorni e fasce orarie. 
-\paragraph{La prenotazione} avviene una volta selezionato un orario (corrispondente a uno \emph{slot}) e confermata l'intenzione di volerlo riservare. Per fare quest'operazione è necessario che l'utente sia autenticato al sistema. Prima di confermare la prenotazione di uno slot, l'utente può scegliere se inserire i dati (almeno uno tra nome e cognome, email o telefono) di un altro utente, anche non iscritto al sistema, per cui prenotare il servizio. Scegliendo questa opzione il destinatario sarà informato mediante delle notifiche sui futuri eventi relativi allo stato della sua prenotazione. A questo punto all'utente viene fornito un ``biglietto virtuale''.
-\paragraph{Il biglietto} consiste in una numerazione. Questa numerazione corrisponde al numero che verrà chiamato allo sportello (si pensi ad un biglietto virtuale staccato al momento della prenotazione). Ciascun servizio è identificato da una lettera dell’alfabeto (A, B, C, \dots) mentre ciascun numero identifica il cliente in coda (1, 2, 3, \dots). In questo modo la numerazione B12, ad esempio, fa riferimento al cliente numero 12 di un servizio, C13 ad un altro cliente di un altro servizio. L’idea è che chi ha prenotato acceda alla struttura nel momento esatto in cui viene erogato il servizio, evitando coda e assembramenti.
+\paragraph{La prenotazione} avviene una volta selezionato un orario (corrispondente a uno \emph{slot}) e confermata l'intenzione di volerlo riservare. Per fare quest'operazione è necessario che l'utente sia autenticato al sistema. Prima di confermare la prenotazione di uno slot, l'utente può scegliere se inserire i dati (almeno uno tra nome e cognome, email o telefono) di un altro utente, anche non iscritto al sistema, per cui prenotare il servizio. Scegliendo questa opzione il destinatario sarà informato mediante delle notifiche sui futuri eventi relativi allo stato della sua prenotazione. A questo punto all'utente viene fornito un ``biglietto virtuale'', che è univoco per quel determinato servizio.
+\paragraph{Il biglietto} consiste in una numerazione. Questa numerazione corrisponde al numero che verrà chiamato allo sportello (si pensi ad un biglietto virtuale staccato al momento della prenotazione). Ciascun servizio è identificato da una lettera dell’alfabeto (A, B, C, \dots) mentre ciascun numero identifica il cliente in coda (1, 2, 3, \dots). In questo modo la numerazione B12, ad esempio, fa riferimento al cliente numero 12 di un servizio, C13 ad un altro cliente di un altro servizio. L’idea è che chi ha prenotato si presenti presso la struttura nel momento esatto in cui viene erogato il servizio, evitando coda e assembramenti. In questo modo anche la logistica dietro a un servizio può essere ottimizzata, ad esempio preparando i documenti necessari alla visita.
 \paragraph{La struttura } deve avere informazione di questo biglietto virtuale, così come l’utente.  Questo avviene attraverso un \textsl{software} installato in loco che prende il nome di \textbf{MRU}, dal nome di Mauro e Ruggero, i due ideatori del sistema software.
 \paragraph{L'MRU} è un software che disponde di un'interfaccia web per gli operatori e per i totem che vengono utilizzati. Tutte le notti l'MRU interroga Zerocoda richiedendo le prenotazioni per la giornata odierna. Se queste sono presenti le scarica. In questo modo anche gli operatori hanno informazione delle prenotazioni.
 
 \subsection{Use Case Diagram}
+In Figura \ref{fig:zerocodausecase} è presentato il diagramma dei casi d'uso di un utente generico di Zerocoda. I diversi colori utilizzati per le operazioni che l'utente può fare rappresentano la \textit{divisione in servizi} scelta per la fase di implementazione delle REST API.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.77\textwidth]{images/02_1_zerocoda_usecase.pdf}
+    \includegraphics[width=0.95\textwidth]{images/02_1_zerocoda_usecase.pdf}
     \caption{Zerocoda Use Case Diagram}
     \label{fig:zerocodausecase}
 \end{figure}
-In Figura \ref{fig:zerocodausecase} è presentato il diagramma dei casi d'uso di un utente generico di Zerocoda. I diversi colori utilizzati per le operazioni che l'utente può fare rappresentano la \textit{divisione in servizi} scelta per la fase di implementazione delle REST API.
 
 \subsection{I diversi Enti Zerocoda}
 Sull'applicazione Zerocoda è possibile prenotare i servizi erogati da diversi enti. Alcuni di questi, tuttavia, non sono presenti sul sito. Ci sono strutture sanitarie che non vogliono che i loro utenti accedano a un sito generalista come \emph{Zerocoda.it}. Questi vogliono che il loro sito funga da ``vetrina'', che l'utente riconosca la struttura presso cui prenota attraverso elementi come il logo, il nome, ecc. L'utilizzo del \textbf{virtual hosting} risponde a questa esigenza. In fase di accesso il servizio compare come se fosse erogato dell’ente privato. Questi \textit{siti premium} consistono in realtà in un sito statico (come lo stesso Zerocoda), ma con una configurazione dedicata, che una volta ricevuta dal browser cambia il \emph{look and feel}.
@@ -129,7 +129,7 @@ Non tutti i siti hanno abbastanza traffico da giustificare il costo di un web se
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{images/02_4_virtual_hosting.pdf}
+    \includegraphics[width=0.98\textwidth]{images/02_4_virtual_hosting.pdf}
     \caption{Funzionamento del Virtual Hosting}
     \label{fig:virtualhosting}
 \end{figure}
@@ -206,7 +206,7 @@ Nella pratica vengono utilizzate diverse versioni del modello a cascata. Attualm
     \item Test: integrazione di sistema, test di sistema e test di integrazione
     \item Esecuzione: rilascio, manutenzione, miglioramento
 \end{enumerate}
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.98\textwidth]{images/02_5_waterfall_model.pdf}
     \caption{Fasi del Modello a Cascata}

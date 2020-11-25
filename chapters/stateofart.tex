@@ -18,7 +18,7 @@ In questo paradigma il programma è costituito da \textit{un unico blocco di cod
 \end{figure}
 
 \subsubsection{Programmazione procedurale (Figura \ref{fig:procedural-programming})}
-Il concetto base di questo tipo di programmazione è quello di raggruppare i pezzi di programma ripetuti in porzioni di codice utilizzabili e richiamabili ogni volta che se ne presenti l’esigenza. Le porzioni di codice con queste caratteristiche prendono il nome di \textit{procedure}. Ogni procedura può essere vista come un \textit{sottoprogramma che svolge una ben determinata funzione} e che è visibile e richiamabile dal resto del codice. La programmazione procedurale rappresenta un notevole passo in avanti rispetto a quella non strutturata, in quanto ne supera i limiti di ridondanza e garantisce una migliore gestione della memoria di sistema. Il vantaggio di una procedure sta nell'utilizzo dei parametri, allocati in memoria solo nel momento in cui una quest'ultima viene chiamata. Il \textit{main continua ad esistere} ma al suo interno presenta esclusivamente le invocazioni alle procedure definite dal programma. 
+Il concetto alla base di questo tipo di programmazione è quello di raggruppare i pezzi di programma ripetuti in porzioni di codice utilizzabili e richiamabili ogni volta che se ne presenti l’esigenza. Le porzioni di codice con queste caratteristiche prendono il nome di \textit{procedure}. Ogni procedura può essere vista come un \textit{sottoprogramma che svolge una ben determinata funzione} e che è visibile e richiamabile dal resto del codice. La programmazione procedurale rappresenta un notevole passo in avanti rispetto a quella non strutturata, in quanto ne supera i limiti di ridondanza e garantisce una migliore gestione della memoria di sistema. Il vantaggio di una procedure sta nell'utilizzo dei parametri, allocati in memoria solo nel momento in cui una quest'ultima viene chiamata. Il \textit{main continua ad esistere} ma al suo interno presenta esclusivamente le invocazioni alle procedure definite dal programma. 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.50\textwidth]{images/01_2_procedural_programming.pdf}
@@ -224,7 +224,7 @@ Il primo tentativo di architettura a servizi nasce con l’\textit{architettura 
 Per studiare le differenze tra le due architettura facciamo riferimento alla Figura \ref{fig:soavsmicroservices}:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.80\textwidth]{images/01_8_microservices_vs_soa.pdf}
+    \includegraphics[width=0.68\textwidth]{images/01_8_microservices_vs_soa.pdf}
     \caption{Architettura SOA e Microservizi }
     \label{fig:soavsmicroservices}
 \end{figure}
@@ -259,10 +259,10 @@ I microservizi consentono di scalare ciascun servizio in modo indipendente per r
 \section{Servizi e API}
 
 \subsection{Cos'è un'API}
-Un'\textit{Application Program Interface (API)} può essere considerata come un \emph{contratto} tra un fornitore di servizi e l'utente destinatario di tali dati: l'API si limita a stabilire il contenuto richiesto dal consumatore (la chiamata) e il contenuto richiesto dal produttore (la risposta). Un'API funge quindi da elemento di intermediazione tra gli utenti e le risorse che questi intendono ottenere. È anche un mezzo con il quale un'organizzazione può condividere risorse e informazioni assicurando al contempo sicurezza e controllo, poiché stabilisce i criteri di accesso. L'utilizzo di un'API permette all'utente di rimanere all'oscuro delle specifiche con cui le risorse vengono recuperate o della loro provenienza.
+Un'\textit{Application Program Interface (API)} può essere considerata come un \emph{contratto} tra un fornitore di servizi e l'utente destinatario di tali dati: l'API si limita a stabilire il contenuto richiesto dal consumatore (la chiamata) e il contenuto richiesto dal produttore (la risposta). Un'API funge quindi da elemento di intermediazione tra gli utenti e le risorse che questi intendono ottenere (Figura \ref{fig:api}). È anche un mezzo con il quale un'organizzazione può condividere risorse e informazioni assicurando al contempo sicurezza e controllo, poiché stabilisce i criteri di accesso. L'utilizzo di un'API permette all'utente di rimanere all'oscuro delle specifiche con cui le risorse vengono recuperate o della loro provenienza.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.90\textwidth]{images/01_9_api.pdf}
+    \includegraphics[width=0.95\textwidth]{images/01_9_api.pdf}
     \caption{Funzionamento delle API}
     \label{fig:api}
 \end{figure}
@@ -275,7 +275,7 @@ Il Representational State Transfer è lo stile architetturale più popolare degl
 \paragraph{Cosa la rende semplice?} L'informazione, o rappresentazione, viene consegnata in uno dei diversi formati tramite HTTP: JSON (Javascript Object Notation), HTML, XLT o testo semplice. Il formato JSON è uno dei più diffusi, perché indipendente dal linguaggio e facilmente leggibile da persone e macchine.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{images/01_10_restapi.pdf}
+    \includegraphics[width=0.98\textwidth]{images/01_10_restapi.pdf}
     \caption{Funzionamento delle API REST}
     \label{fig:restapi}
 \end{figure}

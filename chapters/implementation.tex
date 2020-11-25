@@ -13,7 +13,7 @@ Questo design pattern contribuisce alla semplificazione delle interazioni con il
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/03_1_facade_pattern.pdf}
+    \includegraphics[width=0.65\textwidth]{images/03_1_facade_pattern.pdf}
     \caption{Componenti del Façade Pattern}
     \label{fig:facadepattern}
 \end{figure}
@@ -41,7 +41,7 @@ Per descrivere il funzionamento del software si è utilizzato \emph{Swagger UI},
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{images/03_2_swaggerui.pdf}
+    \includegraphics[width=0.86\textwidth]{images/03_2_swaggerui.pdf}
     \caption{Esempio di Specifica OpenAPI}
     \label{fig:swaggerexample}
 \end{figure}
@@ -59,7 +59,7 @@ In Figura \ref{fig:swaggerexample} viene presentato un esempio di specifica Open
 Sono state individuate un totale di 6 API associabili al \emph{booking server}, tutte originariamente sviluppate come metodi \emph{GET}. Parte di queste API, oltre alle operazioni sul database, comprendono un sistema di notifica utente. Per queste API si è deciso di separare le due operazioni, delegando il sistema di notifica al \emph{Communication Server}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{images/03_3_new_rest_api.pdf}
+    \includegraphics[width=0.95\textwidth]{images/03_3_new_rest_api.pdf}
     \caption{Nuove API REST}
     \label{fig:newrestapi}
 \end{figure}
@@ -245,7 +245,8 @@ La classe \emph{FacilityController} (Figura \ref{fig:facilitycontroller}) presen
 \subsubsection{Classi Service}
 A questo punto si conoscono i vari componenti del sistema. I principali componenti che gestiscono la \emph{logica dietro a una chiamata REST} vengono dichiarati come \emph{dipendenze nel costruttore} della classe service. In seguito, queste istanze chiamano le loro funzioni all'interno del metodo che implementa la chiamata. Il service non si limita a preparare l'oggetto della risposta. In questa classe sono analizzati i parametri della richiesta (headers inclusi), e sono lanciate eccezioni se durante l'esecuzione si verifica un problema. Analizziamo il codice della classe \emph{FacilityService}, che comunica con i componenti appena esposti.
 
-\begin{figure}[H]
+In Figura \ref{fig:facilityservice} viene mostrata l'implementazione della chiamata \texttt{GET v1/facilities}. Com'è logico pensare la classe utilizza le annotazioni Spring per legarsi alla classe ConfigMryouEnterpriseDao (illustrata precedentemente) e al DtoMapper, una classe creata appositamente per convertire gli oggetti mappati sui file XML di MyBatis in oggetti definiti nel DTO (Figura \ref{fig:classdiagram}). Nella classe viene prima creato il filtro come visto (Figura \ref{fig:filterobject}) e successivamente chiamata la query definita nel classe DAO (Figura \ref{fig:daoclass}). Se il risultato della query ha una struttura particolarmente difficile per essere convertito dal DTO, può essere passato al DaoHelper come in questo caso. Il DaoHelper è una classe che ha il compito di separare gli oggetti risultanti dalle query con una o più condizioni di join. Così facendo è possibile fornire al DtoMapper anche due oggetti distinti, facilitandone la conversione. Il nuovo oggetto restituito dal DtoMapper viene in seguito incapsulato in una \emph{lista Result}, che contiene due elementi: la lista contenente gli oggetti restituiti dal mapper (in questo caso sono oggetti Facility) e il numero totale degli elementi della lista.
+\begin{figure}
 \begin{minted}{Java}
 @Service
 public class FacilityService {
@@ -291,8 +292,6 @@ public class FacilityService {
 \caption{Classe FacilityService}
 \label{fig:facilityservice}
 \end{figure}
-
-In Figura \ref{fig:facilityservice} viene mostrata l'implementazione della chiamata \texttt{GET v1/facilities}. Com'è logico pensare la classe utilizza le annotazioni Spring per legarsi alla classe ConfigMryouEnterpriseDao (illustrata precedentemente) e al DtoMapper, una classe creata appositamente per convertire gli oggetti mappati sui file XML di MyBatis in oggetti definiti nel DTO (Figura \ref{fig:classdiagram}). Nella classe viene prima creato il filtro come visto (Figura \ref{fig:filterobject}) e successivamente chiamata la query definita nel classe DAO (Figura \ref{fig:daoclass}). Se il risultato della query ha una struttura particolarmente difficile per essere convertito dal DTO, può essere passato al DaoHelper come in questo caso. Il DaoHelper è una classe che ha il compito di separare gli oggetti risultanti dalle query con una o più condizioni di join. Così facendo è possibile fornire al DtoMapper anche due oggetti distinti, facilitandone la conversione. Il nuovo oggetto restituito dal DtoMapper viene in seguito incapsulato in una \emph{lista Result}, che contiene due elementi: la lista contenente gli oggetti restituiti dal mapper (in questo caso sono oggetti Facility) e il numero totale degli elementi della lista.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
