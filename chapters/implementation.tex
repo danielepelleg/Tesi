@@ -46,7 +46,7 @@ Per descrivere il funzionamento del software si è utilizzato \emph{Swagger UI},
     \label{fig:swaggerexample}
 \end{figure}
 
-In Figura \ref{fig:swaggerexample} viene presentato un esempio di specifica OpenAPI realizzata con swagger. Il documento descrive l'API di prenotazione di un servizio. In riferimento alla numerazione in figura, elenchiamo i campi che compongono la descrizione della nuova API.
+In Figura \ref{fig:swaggerexample} viene presentato un esempio di specifica OpenAPI realizzata con Swagger. Il documento descrive l'API di prenotazione di un servizio. In riferimento alla numerazione in figura, elenchiamo i campi che compongono la descrizione della nuova API.
 \begin{enumerate}
     \item Metodo HTTP eseguito sull'url \emph{/v1/bookings} dove  \emph{`v1'} indica la versione delle attuali API. In questo campo e nel successivo è presente una breve descrizione dell'operazione.
     \item Il lucchetto in alto a destra, quando presente, indica che per quella chiamata è richiesta un'autorizzazione. In questo caso l'utente per poter prenotare un servizio deve aver effettuato l'accesso al sistema.
@@ -68,7 +68,7 @@ In riferimento alla Figura \ref{fig:newrestapi}, vengono ora elencate le operazi
 \begin{itemize}
     \item \texttt{GET v1/bookings} recupera le prenotazioni di un utente. Questa operazione richiede un utente autenticato al sistema. Viene chiamata quando l'utente effettua il login o il numero delle sue prenotazioni cambia, come ad esempio dopo una prenotazione andata a buon fine o dopo una sua cancellazione.
     \item \texttt{POST v1/bookings} registra una nuova prenotazione nel database. Questa richiesta è inviata al booking server nel momento in cui l'utente prenota un servizio. Si tratta di una richiesta fatta con il metodo POST, pertanto è previsto l'invio di un oggetto nel \emph{body della richiesta}. Nell'\emph{oggetto Reservation} mandato nella richiesta viene specificato lo \emph{slot} che l'utente vuole prenotare.
-    \item \texttt{DELETE v1/bookings/\{reservationId\}} il metodo delete viene utilizzato nel momento in cui un utente sceglie di eliminare una prenotazione. Nella richiesta viene specificata una \emph{variabile di percorso}, la quale sta indicare l'ID della prenotazione che l'utente vuole cancellare.
+    \item \texttt{DELETE v1/bookings/\{reservationId\}} il metodo delete viene utilizzato nel momento in cui un utente sceglie di eliminare una prenotazione. Nella richiesta viene specificata una \emph{variabile di percorso}, la quale sta a indicare l'ID della prenotazione che l'utente vuole cancellare.
     \item \texttt{GET v1/calendars/\{functionId\}} restituisce alla pagina i dati relativi al calendario di prenotazione di un servizio (chiamato per l'appunto \emph{function di una facility}). Il parametro in questo caso rappresenta l'ID del servizio di una struttura. Il calendario viene restituito in termini di data: giorno, mese, anno.
     \item \texttt{GET v1/calendars/\{functionId\}/\{day\}} restituisce gli slot disponibili per un determinato giorno appartente al calendario. Può essere considerato come un'estensione del percorso precedente. Ciascuno slot corrisponde a una \emph{fascia oraria} che l'utente può prenotare. L'ID dello slot verrà poi incapsulato dentro un oggetto nel momento in cui l'utente procede con la sua prenotazione, e inserito nel body della relativa richiesta in POST. Gli slot vengono mostrati in termini di orario: ora e minuti. 
 \end{itemize}
@@ -77,7 +77,7 @@ In riferimento alla Figura \ref{fig:newrestapi}, vengono ora elencate le operazi
 \section{Spring Framework}
 \epigraph{«Un framework open source nato con l’intento di gestire la complessità nello sviluppo di applicazioni enterprise.»}{Team di Sviluppo di Spring}
 
-Spring è un framework “leggero” e grazie alla sua architettura estremamente modulare é possibile utilizzarlo nella sua interezza o solo in parte, in quanto non scoinvolge l'architettura esistente. Il framework mette a disposizione \emph{una serie completa di strumenti} atti a gestire l’intera complessità di un progetto software. In particolare, fornisce un approccio semplificato alla maggior parte dei problemi ricorrenti nello sviluppo software: accesso al database, gestione delle dipendenze e testing.
+Spring è un framework “leggero” e grazie alla sua architettura estremamente modulare é possibile utilizzarlo nella sua interezza o solo in parte, in quanto non sconvolge l'architettura esistente. Il framework mette a disposizione \emph{una serie completa di strumenti} atti a gestire l’intera complessità di un progetto software. In particolare, fornisce un approccio semplificato alla maggior parte dei problemi ricorrenti nello sviluppo software: accesso al database, gestione delle dipendenze e testing.
 
 \subsection{Dependency Injection}
 La \emph{Dependency Injection (DI)} è una delle diverse implementazioni che la \emph{Inversion of Control} può avere. Spring implementa la \emph{IoC} tramite Dependency Injection. La \emph{DI} prevede che tutti gli oggetti all’interno della nostra applicazione accettino le dipendenze, ovvero gli oggetti di cui hanno bisogno, tramite costruttore o metodi setter. Non sono quindi gli stessi oggetti a creare le proprie dipendenze, ma queste vengono `iniettate' dall’esterno.
