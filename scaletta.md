@@ -5,20 +5,21 @@
 ### 1. Stato dell'Arte
 * Programmazione Object-Oriented
     * Le origini
-    * Definizione
+    * Definizione di Object Oriented Programming
     * Java | Oracle
 * Database Relazionali
     * Modello Relazionale
     * Struttura
-    * Database non relazionali
+    * Database non Relazionali
     * Le differenze
     * MySQL
 * Architettura di Microservizi
     * Architettura Monolitica
     * Le origini
     * Le differenze con SOA
-    * Caratteristiche
-* Web Services e API
+    * Caratteristiche dei Microservizi
+* Servizi e API
+    * Cos'è un API
     * Representational State Transfer - REST
     * Web Services
 
@@ -28,19 +29,16 @@
     * Use Case Diagram
     * I diversi Enti Zerocoda
 * Analisi dell'Applicazione
-    * Scenario Backend
+    * Multitenancy
+    * Backend Overview
     * Chiamate delle API
-    * Cross Origin Policy
-* Architettura Odierna
+    * Same Origin Policy
+* Architettura Precedente
     * Web Server Apache
     * Virtual Hosting
     * Database MySQL
-* Limiti del Database
-    * Autenticazione
-    * Verifica delle Api Keys
-    * Ridondanza dati
-    * Vincoli di Integrità
-* Reverse Engineering
+    * Limiti dl Database
+* Reingegnerizzazione
     * I motivi
 * Modello di Sviluppo
     * Waterfall Model 
@@ -48,15 +46,15 @@
     * Monolite
     * Scenario
     * Microservizi
+    * Authentication Server
 * Architettura Ideale
 
 ### 3. Implementazione
 * Design Pattern
-    * Inversion od Control
-    * Façade Pattern
+    * Inversion of Control
 * Documentazione
-    * Swagger UI
-    * Nuove API REST
+    * Swagger
+    * Nuove API
 * Spring Framework
     * Dependency Injection
     * Annotazioni
@@ -64,11 +62,15 @@
     * Configurazione
     * Creazione di una Query
 * Struttura del Progetto
-    * DTO
-    * DAO
-    * Rest Services
+    * Data Transfer Object - DTO
+    * Data Access Object - DAO
+    * Booking Server
 
+### 4. Attività di Test
+* Configurazione di JMeter
+* Risultati Ottenuti
+    * Vecchie API
+    * Nuove API
+* Confronto dei Sistemi
 
 ### Conclusione
-* Performance Test
-    * JMeter
