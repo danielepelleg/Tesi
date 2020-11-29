@@ -112,7 +112,7 @@ Il modello relazionale si basa su due concetti: \textbf{relazione} e \textbf{tab
 Secondo il modello relazionale, le strutture dei dati logici, ovvero tabelle di dati, viste e indici, sono separate dalle strutture di storage fisiche. Grazie a questa separazione, gli amministratori di database possono gestire lo storage fisico dei dati senza compromettere l'accesso a tali dati come struttura logica. Questo permette di accedere ai dati in modi diversi senza riorganizzare le tabelle e di ottenere quindi \textbf{l'indipendenza fisica dei dati}.
 
 \subsection{Database non Relazionali}
-Questo tipo di struttura dati si differenzia da quella appena presentata dal momento che non richiede uno schema fisso. La base su cui poggia tutta la costruzione dei database di questo tipo non è costituita da tabelle di dati ma da documenti. La forza di questo principio è proprio che tutto quello che serve all’applicazione risiede nel documento già precompilato. Si evita le frammentazione dell’informazione e la sua ricostruzione, con i rischi di perdere dati o averne di corrotti. Un aumento di flessibilità che velocizza le operazioni e offre risposte più veloci all'utente finale.
+Questo tipo di struttura dati si differenzia da quella appena presentata dal momento che non richiede uno schema fisso. La base su cui poggia tutta la costruzione dei database di questo tipo non è costituita da tabelle di dati ma da documenti (Figura \ref{fig:nonrelational-database}). La forza di questo principio è proprio che tutto quello che serve all’applicazione risiede nel documento già precompilato. Si evita le frammentazione dell’informazione e la sua ricostruzione, con i rischi di perdere dati o averne di corrotti. Un aumento di flessibilità che velocizza le operazioni e offre risposte più veloci all'utente finale.
 \begin{figure}[H]
     \centering
     \begin{minted}{JSON}
@@ -171,7 +171,7 @@ Il nome SQL deriva l’abbreviazione di \textit{Structured Query Language}, un l
     \item \textit{DQL - Data Query Language} per interrogare i \emph{dati memorizzati}
     \item \textit{DCL - Data Control Language} creare e gestire strumenti di controllo e accesso ai dati
 \end{itemize}
-Sarebbe quindi diminutivo definire SQL 'un semplice linguaggio di interrogazione' in quanto alcuni dei suoi sottoinsiemi sopra elencati permettono di creare, gestire e modificare il database. La popolarità di SQL è inoltre dovuta alla sua facilità di comprensione, dovuta a un linguaggio con comandi semplici, autoesplicativi nella loro sintassi, e prestante per qualsiasi tipo di operazione.
+Sarebbe quindi diminutivo definire SQL `un semplice linguaggio di interrogazione' in quanto alcuni dei suoi sottoinsiemi sopra elencati permettono di creare, gestire e modificare il database. La popolarità di SQL è inoltre dovuta alla sua facilità di comprensione, dovuta a un linguaggio con comandi semplici, autoesplicativi nella loro sintassi, e prestante per qualsiasi tipo di operazione. Si osservi, come esempio, la Figura \ref{fig:sql-example}.
 \begin{figure}[H]
     \centering
     \begin{minted}{SQL}
@@ -321,7 +321,7 @@ Con il termine si fa riferimento all'acronimo delle operazioni mappate ai metodi
     \item \textit{DELETE}
 \end{itemize}
 
-Ad ogni tipo di operazione sul database corrisponde quindi un metodo HTTP. L'url di una risorsa la identifica univocamente, mentre il metodo della chiamata definisce l'operazione che si va a fare su di essa.
+Ad ogni tipo di operazione sul database corrisponde quindi un metodo HTTP (Figura \ref{fig:crudoperations}). L'url di una risorsa la identifica univocamente, mentre il metodo della chiamata definisce l'operazione che si va a fare su di essa.
 
 \begin{figure}[H]
     \centering
@@ -347,7 +347,7 @@ SOAP è un protocollo ufficiale gestito dal W3C (World Wide Web Consortium), ide
 Dal loro acronimo l'insieme di questi standard prende il nome di \textbf{ACID}.
 
 \subsubsection{Richieste e Risposte}
-Una richiesta di dati inviata a un'API SOAP può essere gestita tramite uno dei protocolli a livello applicativo: HTTP (per i browser web), SMTP (per l'email), TCP e altri. Una volta ricevuta la richiesta, i messaggi SOAP di ritorno devono essere restituiti come documenti in formato \textbf{XML}, un linguaggio di markup facilmente leggibile da utenti e macchine. Una \textit{richiesta completata a un'API SOAP non viene memorizzata nella cache del browser}, e pertanto non sarà possibile accedervi successivamente senza rinviarla all'API.
+Una richiesta di dati inviata a un'API SOAP può essere gestita tramite uno dei protocolli a livello applicativo: HTTP (per i browser web), SMTP (per l'email), TCP e altri. Una volta ricevuta la richiesta, i messaggi SOAP di ritorno devono essere restituiti come documenti in formato \textbf{XML} (Figura \ref{fig:soaprequest}), un linguaggio di markup facilmente leggibile da utenti e macchine. Una \textit{richiesta completata a un'API SOAP non viene memorizzata nella cache del browser}, e pertanto non sarà possibile accedervi successivamente senza rinviarla all'API.
 
 \begin{figure}[H]
     \begin{minted}{XML}
