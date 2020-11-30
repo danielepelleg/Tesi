@@ -3,7 +3,7 @@
 In questo capitolo vengono descritti i test effettuati per valutare le prestazioni del sistema sviluppato. Per fare questo genere di test è stato utilizzato \emph{JMeter}: un tool per misurare le prestazioni di un sistema mediante dei test di carico. Durante questi test si confrontano le vecchie API con le nuove, descritte nel Capitolo 3.
 
 \section{Configurazione di JMeter}
-\emph{JMeter} è un progetto open source della \emph{Apache Foundation}. La vera particolarità di questo software è quella di essere perfettamente configurabile per automatizzare le operazioni di test di carico su macchine remote. Nel nostro caso è stato utilizzato per testare le richieste, mediante le API, al database. Sono stati realizzati due progetti: il primo relativo alle \textit{vecchie API di Zerocoda}, il secondo relativo alle \textit{nuove}, oggetto di questo elaborato. E' stata simulata l'azione concorrenziale di più utenti (thread) che attraverso un dataset di valori pre-inseriti andassero a richiamare le API. Per una corretta interpretazione dei risultati, la configurazione è rimasta la stessa tra i due progetti. È rimasto \textit{invariato il numero di thread}, l'intervallo (in secondi) in cui questi venivano chiamati, e il numero di loop (serie di operazione) eseguito da ogni thread. Le operazioni svolte da ciascun test mirano a simulare l'attività di un utente sul sistema, e in ordine sono:
+\emph{JMeter} è un progetto open source della \emph{Apache Foundation}. La vera particolarità di questo software è quella di essere perfettamente configurabile per automatizzare le operazioni di test di carico su macchine remote. Nel nostro caso è stato utilizzato per testare le richieste, mediante le API, al database. Sono stati realizzati due progetti: il primo relativo alle \textit{vecchie API di Zerocoda}, il secondo relativo alle \textit{nuove}, oggetto di questo elaborato. È stata simulata l'azione concorrenziale di più utenti (thread) che attraverso un dataset di valori pre-inseriti andassero a richiamare le API. Per una corretta interpretazione dei risultati, la configurazione è rimasta la stessa tra i due progetti. È rimasto \textit{invariato il numero di thread}, l'intervallo (in secondi) in cui questi venivano chiamati, e il numero di loop (serie di operazione) eseguito da ogni thread. Le operazioni svolte da ciascun test mirano a simulare l'attività di un utente sul sistema, e in ordine sono:
 \begin{enumerate}
     \item Ricerca delle strutture
     \item Ricerca del calendario di una struttura
@@ -16,8 +16,6 @@ I dati inseriti sono stati gestiti attraverso diversi dataset, che a ogni loop f
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Risultati Ottenuti}
-Di seguito vengono illustrati i grafici realizzati con appositi plugin di JMeter. 
-%Il grafico utilizzato prende il nome di \emph{Response Times Graph}. In esso, il tempo di risposta in millisecondi di ogni richiesta (asse delle ordinate) viene calcolato in funzione dell'orario in cui la richiesta è stata effettuata (sull'asse delle ascisse).
 Di seguito vengono illustrati i grafici realizzati con appositi plugin di JMeter. Si fa riferimento a due tipologie grafico:
 \begin{itemize}
     \item \textbf{Response Time Graph}: il tempo di risposta in millisecondi di ogni richiesta (asse delle ordinate) viene calcolato in funzione dell'orario in cui la richiesta è stata effettuata (asse delle ascisse) 
@@ -75,12 +73,12 @@ Le nuove API hanno dato un esito positivo già nel loro tempo totale di esecuzio
             \hline
             Request & \# Samples & Average  & Min & Max &  Throughput\\
             \hline
-            GET Facilities      & 10000    & 89   & 28 & 108 & 100,43993      \\
-            GET Calendar        & 10000    & 150   & 49 & 187        & 100,44699      \\
-            GET Slots        & 10000    & 223   & 76 & 260        & 100.44295      \\
-            POST Reser.        & 10000    & 249    & 98 & 283        & 100,44598      \\
-            DELETE Reserv.        & 10000    & 232    & 92 & 311        & 100,45203      \\
-            TOTAL        & 50000    & 189    & 28 & 311        & 502,00299      \\
+            GET Facilities      & 10000    & 74   & 2 & 698 & 123.80221      \\
+            GET Calendar        & 10000    & 125   & 3 & 971        & 123.80834      \\
+            GET Slots        & 10000    & 181   & 5 & 1039        & 123.80375      \\
+            POST Reser.        & 10000    & 184    & 7 & 942        & 123.80221      \\
+            DELETE Reserv.        & 10000    & 181    & 6 & 938        & 123.80221      \\
+            TOTAL        & 50000    & 149    & 2 & 1039        & 618.78891      \\
             \hline
         \end{tabular}
     \end{table}
