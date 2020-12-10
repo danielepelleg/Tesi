@@ -85,7 +85,7 @@ La \emph{Dependency Injection (DI)} è una delle diverse implementazioni che la 
 \subsection{Annotazioni}
 La dichiarazione dei componenti (da ora chiamati \emph{bean}), come in generale la configurazione di un’applicazione Spring, può avvenire in tre modi differenti: tramite \textit{file XML}, \textit{classi di configurazione}, oppure \textit{annotazioni Java}. Di seguito si fa riferimento alle principali annotazioni utilizzate durante l'implementazione nel codice Java:
 \begin{itemize} 
-    \item \texttt{@Controller} gestisce le interazioni tra utenti e logica di business. Riceve comandi ed espone le informazioni in modo da essere comprensibili per l’utente o utilizzabile da altri sistemi. Nel codice è stata utilizzata l'annotazione \emph{@RestController} (un alias di questa annotazione) per fare riferimento alle classi di controllo dei servizi \textit{BookingController, CalendarController e FacilityController}.
+    \item \texttt{@Controller} gestisce le interazioni tra utenti e logica di business. Riceve comandi ed espone le informazioni in modo che siano comprensibili per l’utente o utilizzabili da altri sistemi. Nel codice è stata utilizzata l'annotazione \emph{@RestController} (un alias di questa annotazione) per fare riferimento alle classi di controllo dei servizi \textit{BookingController, CalendarController e FacilityController}.
     \item \texttt{@Service} gestisce la logica di business. Ha la funzione di elaborare i dati e di fornirli ai Controller per essere esposti verso il client. Allo stesso tempo, le informazioni da salvare vengono inviate allo strato di accesso ai dati. Questa annotazione è stata utilizzata nelle classi \textit{BookingService, CalendarService e FacilityService}, dove venivano implementati i metodi chiamati dalle REST API.
     \item \texttt{@Autowired} può essere applicata a diversi elementi della classe: un campo, un metodo o un costruttore. Lo scopo dell'annotazione è quello di indicare a Spring quali sono le dipendenze richieste da un determinato oggetto. Queste vengono ricercate tra le istanze presenti nell'IoC container e, se presenti, vengono `iniettate' mediante il costruttore o il metodo annotato. Un esempio di implementazione di questa annotazione la si ha nelle classi \emph{Service}, dove per comunicare con il database nel costruttore si istanzia la relativa classe \textit{Data Access Object}, che invece presenta l'annotazione \emph{Service}.
 \end{itemize}
@@ -152,13 +152,13 @@ L'oggetto creato è ora pronto per essere passato al metodo \texttt{selectByFilt
 \section{Struttura del Progetto}
 In questa sezione viene presentato il packaging del progetto. Si presentano i moduli che lo compongono e le loro interazioni, simulando l'operazione di chiamata di una REST API. All'interno del progetto distinguiamo 3 moduli principali, ciascuno con funzionalità diverse:
 \begin{itemize}
-    \item \textbf{booking-dto}: contiene le classi utilizzate per instanziare gli oggetti utilizzati nei body delle richieste POST del client, o per istanziare gli oggetti restituiti dal server.
+    \item \textbf{booking-dto}: contiene le classi utilizzate per istanziare gli oggetti utilizzati nei body delle richieste POST del client, o per istanziare gli oggetti restituiti dal server.
     \item \textbf{booking-persistance}: comprende le classi di persistenza, ovvero tutte quelle classi di Mapping e configurazione delle tabelle del database, nonchè i file XML necessari al corretto funzionamento di MyBatis.
     \item \textbf{booking-server}: contiene le vere e proprie API REST. In questo modulo sono contenute le classi Controller delle API, con i relativi servizi dove vengono implementate le chiamate. In riferimento alla Figura \ref{fig:newrestapi} individuiamo 3 controller, ai quali corrispondono i 3 servizi: \emph{booking}, \emph{calendar} e \emph{facility}.
 \end{itemize}
 
 \subsection{Data Transfer Object - DTO}
-Il \emph{Data Transfer Object} è un design pattern utilizzato per trasferire dati tra sottosistemi di un'applicazione software. Nel processo di implementazione, il DTO è stato utilizzato per mappare gli oggetti restituiti dalle query del DAO, in oggetti con cui l'utente può interagire. In questo modo il risultato di una query che sul database interessa diverse tabelle viene presentata all'utente come un singolo oggetto che può comprendere.
+Il \emph{Data Transfer Object} è un design pattern utilizzato per trasferire dati tra sottosistemi di un'applicazione software. Nel processo di implementazione, il DTO è stato utilizzato per mappare gli oggetti restituiti dalle query del DAO, in oggetti con cui l'utente può interagire. In questo modo il risultato di una query che sul database interessa diverse tabelle viene presentato all'utente come un singolo oggetto che può comprendere.
 
 \subsubsection{Class Diagram}
 In Figura \ref{fig:classdiagram} viene presentato il diagramma delle classi utilizzate per il mapping dei risultati ottenuti dalle query. Nelle sezioni successive si farà riferimento a questi oggetti. I diversi colori utilizzati rappresentano la suddivisione in servizi. Le classi che non sono state colorate istanziano oggetti che non sono direttamente utilizzati nelle richieste o restituiti nelle risposte dalle chiamate REST.
@@ -170,7 +170,7 @@ In Figura \ref{fig:classdiagram} viene presentato il diagramma delle classi util
 \end{figure}
 
 \subsection{Data Access Object - DAO}
-Il \emph{Data Access Object} rappresenta un pattern architetturale per la gestione della persistenza. Seguendo questo design pattern, è possibile trovare nell'omonimo modulo un set di classi atte a disaccoppire il server dall'accesso al database. Il DAO gestisce l'interazione tra i servizi REST e l'accesso al database mediato dai mapping realizzati con MyBatis, nascondendone i passaggi implementativi.
+Il \emph{Data Access Object} rappresenta un pattern architetturale per la gestione della persistenza. Seguendo questo design pattern, è possibile trovare nell'omonimo modulo un set di classi atte a disaccoppiare il server dall'accesso al database. Il DAO gestisce l'interazione tra i servizi REST e l'accesso al database mediato dai mapping realizzati con MyBatis, nascondendone i passaggi implementativi.
 
 \begin{figure}
 \begin{minted}{Java}
